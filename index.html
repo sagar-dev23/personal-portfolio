@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Sagar Panchal — Webflow Developer & Designer</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="Sagar Panchal — Webflow Developer & Designer building refined, conversion-focused marketing sites and product experiences." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter+Tight:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  /* ─── Design tokens ─── */
+  :root {
+    --bg: #FAFAF7;
+    --bg-2: #F2F0EA;
+    --fg: #0A0A0A;
+    --fg-2: #1A1A1A;
+    --muted: rgba(10,10,10,0.56);
+    --faint: rgba(10,10,10,0.36);
+    --line: rgba(10,10,10,0.10);
+    --line-soft: rgba(10,10,10,0.06);
+    --soft: rgba(10,10,10,0.04);
+    --card: #FFFFFF;
+    --accent: #146EF5;
+    --accent-soft: rgba(20,110,245,0.10);
+    --font-display: "Space Grotesk", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --radius: 18px;
+    --radius-lg: 28px;
+  }
+  html[data-theme="warm"] {
+    --bg: #F0EDE5; --bg-2: #E8E4D9; --fg: #18150F; --fg-2: #2A2620;
+    --muted: rgba(24,21,15,0.58); --faint: rgba(24,21,15,0.36);
+    --line: rgba(24,21,15,0.12); --line-soft: rgba(24,21,15,0.07);
+    --soft: rgba(24,21,15,0.05); --card: #F7F4ED;
+    --accent-soft: rgba(20,110,245,0.12);
+  }
+  html[data-theme="dark"] {
+    --bg: #0B0B0B; --bg-2: #131313; --fg: #F4F2EC; --fg-2: #E6E4DE;
+    --muted: rgba(244,242,236,0.62); --faint: rgba(244,242,236,0.36);
+    --line: rgba(244,242,236,0.10); --line-soft: rgba(244,242,236,0.06);
+    --soft: rgba(244,242,236,0.04); --card: #161616;
+    --accent-soft: rgba(20,110,245,0.16);
+  }
+  html[data-type="tight"]   { --font-display: "Inter Tight", system-ui, sans-serif; }
+  html[data-type="manrope"] { --font-display: "Manrope", system-ui, sans-serif; }
+
+  /* ─── Reset & base ─── */
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    transition: background-color .4s ease, color .4s ease;
+  }
+  body[data-cursor="on"] { cursor: none; }
+  body[data-cursor="on"] * { cursor: none !important; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; }
+  ::selection { background: var(--accent); color: #fff; }
+
+  /* ─── Layout ─── */
+  .wrap { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 48px; }
+  @media (max-width: 1024px) { .wrap { padding: 0 32px; } }
+  @media (max-width: 640px)  { .wrap { padding: 0 20px; } }
+
+  /* ─── Type ─── */
+  .display { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.035em; line-height: 0.94; }
+  .mono { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+  /* ─── Section ─── */
+  .section { padding: 120px 0; position: relative; }
+  @media (max-width: 768px) { .section { padding: 80px 0; } }
+  @media (max-width: 480px) { .section { padding: 60px 0; } }
+  .hair { height: 1px; background: var(--line); width: 100%; }
+
+  /* ─── Pill ─── */
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    height: 28px; padding: 0 12px;
+    border: 0.5px solid var(--line); border-radius: 999px;
+    font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--fg-2); background: var(--card); backdrop-filter: blur(8px);
+  }
+  .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity:1 } 50% { opacity:.45 } }
+
+  /* ─── Buttons ─── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    height: 50px; padding: 0 22px; border-radius: 999px;
+    font-family: var(--font-display); font-weight: 500; font-size: 14.5px; letter-spacing: -0.005em;
+    transition: transform .35s cubic-bezier(.2,.7,.2,1), background-color .25s, color .25s, border-color .25s;
+    border: 0.5px solid transparent; will-change: transform;
+  }
+  .btn-primary { background: var(--fg); color: var(--bg); }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-secondary { background: transparent; border-color: var(--line); color: var(--fg); }
+  .btn-secondary:hover { background: var(--soft); border-color: var(--fg); }
+  .btn .arrow { transition: transform .35s cubic-bezier(.2,.7,.2,1); display: inline-flex; }
+  .btn:hover .arrow { transform: translate(3px,-3px); }
+
+  /* ─── Reveal on scroll ─── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal[data-delay="1"] { transition-delay: .08s; }
+  .reveal[data-delay="2"] { transition-delay: .16s; }
+  .reveal[data-delay="3"] { transition-delay: .24s; }
+  .reveal[data-delay="4"] { transition-delay: .32s; }
+
+  /* ─── Custom cursor ─── */
+  .cursor-dot, .cursor-ring {
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 2147483645;
+    border-radius: 50%; mix-blend-mode: difference; will-change: transform;
+  }
+  .cursor-dot { width: 6px; height: 6px; background: #fff; transform: translate(-50%,-50%); transition: width .25s, height .25s, opacity .25s; }
+  .cursor-ring { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.5); transform: translate(-50%,-50%); transition: width .35s cubic-bezier(.2,.7,.2,1), height .35s cubic-bezier(.2,.7,.2,1), opacity .25s, background-color .25s; }
+  .cursor-ring.is-hover { width: 64px; height: 64px; background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.7); }
+  @media (hover: none), (pointer: coarse) {
+    body[data-cursor="on"] { cursor: auto !important; }
+    body[data-cursor="on"] * { cursor: auto !important; }
+    .cursor-dot, .cursor-ring { display: none !important; }
+  }
+
+  /* ─── Marquee ─── */
+  .marquee { display: flex; gap: 64px; white-space: nowrap; animation: marquee 40s linear infinite; }
+  .marquee.reverse { animation-direction: reverse; }
+  @keyframes marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+  .marquee-row { overflow: hidden; mask-image: linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); -webkit-mask-image: linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+
+  /* ─── Underline link ─── */
+  .ulink { position: relative; display: inline-block; }
+  .ulink::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: currentColor; transform-origin: right; transform: scaleX(1); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+  .ulink:hover::after { transform-origin: left; transform: scaleX(0); animation: ulink-in .5s .25s cubic-bezier(.2,.7,.2,1) forwards; }
+  @keyframes ulink-in { from { transform-origin:left; transform:scaleX(0); } to { transform-origin:left; transform:scaleX(1); } }
+
+  /* ─── Nav ─── */
+  .nav {
+    position: fixed; top: 16px; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: center; pointer-events: none;
+  }
+  .nav-inner {
+    pointer-events: auto;
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 8px 8px 18px;
+    border: 0.5px solid var(--line);
+    background: color-mix(in srgb, var(--card) 80%, transparent);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-radius: 999px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 8px 30px rgba(0,0,0,.06);
+  }
+  .nav-brand { font-family: var(--font-display); font-weight: 600; font-size: 14px; letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; padding-right: 12px; border-right: 0.5px solid var(--line); margin-right: 6px; }
+  .nav-brand .glyph { width: 18px; height: 18px; border-radius: 5px; background: var(--fg); position: relative; overflow: hidden; }
+  .nav-brand .glyph::after { content: ""; position: absolute; inset: 4px; border-radius: 2px; background: var(--bg); }
+  .nav-links { display: flex; gap: 2px; }
+  .nav-link { height: 36px; padding: 0 14px; display: inline-flex; align-items: center; font-family: var(--font-body); font-weight: 500; font-size: 13.5px; color: var(--fg-2); border-radius: 999px; transition: background-color .2s, color .2s; }
+  .nav-link:hover { background: var(--soft); color: var(--fg); }
+  .nav-cta { height: 36px; padding: 0 16px 0 14px; display: inline-flex; align-items: center; gap: 8px; background: var(--fg); color: var(--bg); border-radius: 999px; font-family: var(--font-display); font-weight: 500; font-size: 13px; transition: background-color .25s; }
+  .nav-cta:hover { background: var(--accent); }
+  .nav-cta .ndot { width: 6px; height: 6px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399; }
+  /* Hamburger */
+  .nav-hamburger { display: none; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 999px; background: var(--fg); border: 0; cursor: pointer; flex-direction: column; gap: 4px; padding: 0; }
+  .ham-bar { display: block; width: 14px; height: 1.5px; background: var(--bg); border-radius: 99px; transition: transform .3s ease, opacity .3s ease; }
+  .ham-open .ham-bar:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+  .ham-open .ham-bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .ham-open .ham-bar:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+  /* Mobile menu */
+  .mobile-nav {
+    position: fixed; top: 68px; left: 12px; right: 12px; z-index: 99;
+    background: color-mix(in srgb, var(--card) 90%, transparent);
+    border: 0.5px solid var(--line);
+    border-radius: 20px; padding: 8px;
+    box-shadow: 0 8px 40px rgba(0,0,0,.12);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    display: flex; flex-direction: column;
+    animation: mobMenuIn .22s cubic-bezier(.2,.7,.2,1);
+  }
+  @keyframes mobMenuIn { from { opacity:0; transform:translateY(-10px) scale(.97); } to { opacity:1; transform:none; } }
+  .mobile-nav-link { padding: 14px 18px; font-family: var(--font-display); font-weight: 500; font-size: 19px; letter-spacing: -0.015em; color: var(--fg); border-radius: 12px; display: block; transition: background .2s; }
+  .mobile-nav-link:hover { background: var(--soft); }
+  .mobile-nav-hair { height: 0.5px; background: var(--line); margin: 6px 4px; }
+  .mobile-nav-cta { margin: 6px 4px 4px; display: flex; }
+  .mobile-nav-cta .btn { flex: 1; justify-content: center; height: 48px; }
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
+  }
+
+  /* ─── Tag chip ─── */
+  .tag { display: inline-flex; align-items: center; height: 26px; padding: 0 10px; border-radius: 999px; border: 0.5px solid var(--line); font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+
+  /* ─── Card ─── */
+  .card { background: var(--card); border: 0.5px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: transform .5s cubic-bezier(.2,.7,.2,1), border-color .3s; }
+  .card:hover { border-color: var(--fg-2); }
+
+  /* ─── Placeholder image ─── */
+  .ph { position: relative; background: var(--bg-2); overflow: hidden; border-radius: 8px; }
+  .ph::before { content: ""; position: absolute; inset: 0; background-image: repeating-linear-gradient(135deg,transparent 0 14px,var(--line-soft) 14px 15px); opacity: 0.9; }
+  .ph .ph-label { position: absolute; top: 12px; left: 12px; font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; background: var(--card); padding: 4px 8px; border-radius: 4px; border: 0.5px solid var(--line); }
+
+  /* ─── Grid canvas ─── */
+  .grid-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  /* ─── Floating tags (hero bento motif) ─── */
+  .float-tag { position: absolute; display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; background: var(--card); border: 0.5px solid var(--line); border-radius: 999px; font-family: var(--font-display); font-weight: 500; font-size: 13px; box-shadow: 0 8px 30px rgba(0,0,0,.04); backdrop-filter: blur(12px); animation: floaty 6s ease-in-out infinite; }
+  .float-tag .fdot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  @keyframes floaty { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-8px) } }
+  @media (max-width: 640px) { .float-tag { display: none; } }
+
+  /* ─── Orb ─── */
+  .orb { position: absolute; border-radius: 50%; background: radial-gradient(circle at 30% 30%,rgba(20,110,245,.45),rgba(20,110,245,.1) 40%,transparent 70%),radial-gradient(circle at 70% 70%,rgba(20,110,245,.25),transparent 50%); filter: blur(20px); animation: orb 14s ease-in-out infinite; }
+  @keyframes orb { 0%,100% { transform:translate(0,0) scale(1) } 50% { transform:translate(40px,-30px) scale(1.08) } }
+
+  /* ─── Kbd ─── */
+  .kbd { display: inline-flex; align-items: center; justify-content: center; height: 22px; min-width: 22px; padding: 0 6px; border: 0.5px solid var(--line); border-radius: 5px; background: var(--card); font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-2); }
+
+  /* ─── Stat ─── */
+  .stat .num { font-family: var(--font-display); font-weight: 400; font-size: 56px; letter-spacing: -0.04em; line-height: 1; color: var(--fg); }
+  .stat .lbl { color: var(--muted); font-size: 12px; font-family: var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; margin-top: 8px; }
+  @media (max-width: 640px) { .stat .num { font-size: 38px; } }
+  @media (max-width: 380px) { .stat .num { font-size: 32px; } }
+
+  /* ─── Rail ─── */
+  .rail { position: absolute; left: 32px; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: left center; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+
+  /* ─── Magnetic wrapper ─── */
+  .mag { display: inline-flex; }
+
+  /* ─── Cap strip ─── */
+  .cap-strip { display: flex; gap: 16px; align-items: center; }
+  .cap-strip .cap { display: inline-flex; align-items: center; gap: 10px; padding: 0 16px; height: 40px; border: 0.5px solid var(--line); border-radius: 999px; background: var(--card); font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--fg-2); }
+  .cap .star { color: var(--accent); }
+
+  /* ─── Hero foot ─── */
+  .hero-foot { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; margin-top: 60px; align-items: end; }
+  @media (max-width: 768px) {
+    .hero-foot { grid-template-columns: 1fr !important; gap: 24px !important; }
+    .hero-foot > div:last-child { justify-content: flex-start !important; }
+  }
+
+  /* ─── Hero stats row ─── */
+  .hero-stats-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-top: 90px; }
+  .hero-stats-inner { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+  @media (max-width: 640px) { .hero-stats-inner { gap: 16px; } }
+
+  /* ─── Section head row ─── */
+  .section-head-row { display: grid; grid-template-columns: auto 1fr; gap: 56px; align-items: end; margin-bottom: 64px; }
+  @media (max-width: 640px) {
+    .section-head-row { grid-template-columns: 1fr !important; gap: 16px !important; margin-bottom: 40px !important; }
+  }
+
+  /* ─── Work row ─── */
+  .work-row { display: grid; grid-template-columns: 1fr auto auto auto; gap: 32px; align-items: center; padding: 28px 8px; border-bottom: 0.5px solid var(--line); cursor: default; position: relative; transition: padding .35s ease; }
+  .work-row:hover { padding-left: 24px; }
+  .work-row .preview { position: absolute; right: 12%; top: 50%; width: 280px; height: 180px; transform: translate(0,-50%) scale(.96); opacity: 0; pointer-events: none; border-radius: 10px; box-shadow: 0 30px 80px rgba(0,0,0,.18); transition: opacity .35s, transform .35s; z-index: 3; }
+  .work-row:hover .preview { opacity: 1; transform: translate(0,-50%) scale(1); }
+  @media (max-width: 768px) {
+    .work-row { grid-template-columns: 1fr; gap: 10px; padding: 20px 0; }
+    .work-row .preview { display: none; }
+    .work-row > .mono:not(:first-child) { display: none; }
+  }
+
+  /* ─── Mosaic ─── */
+  .mosaic { display: grid; grid-template-columns: repeat(12,1fr); gap: 20px; }
+  .mosaic .m { position: relative; overflow: hidden; border-radius: var(--radius); border: 0.5px solid var(--line); background: var(--card); }
+  .mosaic .m .img { position: relative; overflow: hidden; }
+  .mosaic .m .img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg,transparent 60%,rgba(0,0,0,.25)); opacity: 0; transition: opacity .4s; }
+  .mosaic .m:hover .img::after { opacity: .7; }
+  .mosaic .m .img img, .mosaic .m .img .ph { width: 100%; height: 100%; display: block; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+  .mosaic .m:hover .img .ph { transform: scale(1.04); }
+  .mosaic .m .meta { padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 14px; }
+  .mosaic .m .meta .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .mosaic .m h3 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 22px; letter-spacing: -0.02em; line-height: 1.1; }
+  @media (max-width: 768px) {
+    .mosaic { grid-template-columns: 1fr; gap: 12px; }
+    .mosaic .m { grid-column: 1 !important; }
+  }
+
+  /* ─── Stacked layout ─── */
+  .stacked .m { grid-column: span 12 !important; display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; }
+  .stacked .m .img { grid-row: 1; }
+  .stacked .m .meta { padding: 36px; align-self: center; gap: 18px; }
+  .stacked .m:nth-child(even) .img { order: 2; }
+  @media (max-width: 880px) { .stacked .m { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) {
+    .stacked .m .img { order: 0 !important; }
+    .stacked .m .meta { padding: 20px !important; }
+    .stacked .m h3 { font-size: 24px !important; }
+  }
+
+  /* ─── Bento ─── */
+  .bento { display: grid; grid-template-columns: repeat(12,1fr); grid-auto-rows: minmax(120px,auto); gap: 16px; }
+  .bento .b { background: var(--card); border: 0.5px solid var(--line); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; min-height: 160px; transition: border-color .3s, transform .5s; }
+  .bento .b:hover { border-color: var(--fg-2); }
+  .bento h4 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 18px; letter-spacing: -0.015em; }
+  .bento p { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.55; }
+  @media (max-width: 880px) {
+    .bento { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .bento .b { grid-column: span 1 !important; grid-row: span 1 !important; }
+  }
+  @media (max-width: 560px) {
+    .bento { grid-template-columns: 1fr; gap: 10px; }
+    .bento .b { grid-column: 1 !important; }
+  }
+
+  /* ─── Counter inner grid ─── */
+  .counter-inner { display: grid; grid-template-columns: repeat(3,1fr); height: 100%; }
+  @media (max-width: 480px) {
+    .counter-inner { grid-template-columns: 1fr 1fr; }
+    .counter-inner > div:nth-child(3) { border-left: 0.5px solid var(--line) !important; border-top: 0.5px solid var(--line); }
+    .counter-inner > div:nth-child(even) { border-left: 0.5px solid var(--line) !important; }
+  }
+
+  /* ─── Services ─── */
+  .svc-row { display: grid; grid-template-columns: 56px 1fr 1.4fr auto; gap: 36px; padding: 36px 8px; border-top: 0.5px solid var(--line); align-items: start; transition: padding .35s, background-color .35s; }
+  .svc-row:last-child { border-bottom: 0.5px solid var(--line); }
+  .svc-row:hover { padding-left: 24px; }
+  .svc-num { font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding-top: 6px; }
+  .svc-title { font-family: var(--font-display); font-weight: 500; font-size: 28px; letter-spacing: -0.025em; line-height: 1.05; }
+  .svc-desc { color: var(--muted); font-size: 15px; line-height: 1.6; max-width: 520px; }
+  .svc-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  @media (max-width: 880px) { .svc-row { grid-template-columns: 1fr; gap: 14px; } }
+  @media (max-width: 640px) { .svc-title { font-size: 22px !important; } .svc-row { padding: 24px 0; } }
+
+  /* ─── Contact headline ─── */
+  .contact-h { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.045em; line-height: 0.92; font-size: clamp(40px, 9vw, 120px); }
+  .contact-h .acc { color: var(--accent); font-style: italic; font-weight: 400; }
+
+  /* ─── Contact inner ─── */
+  .contact-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start; }
+  @media (max-width: 768px) {
+    .contact-inner { grid-template-columns: 1fr !important; gap: 32px !important; margin-top: 48px !important; }
+  }
+
+  /* ─── Contact form row ─── */
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 480px) { .form-row { grid-template-columns: 1fr !important; } }
+
+  /* ─── Footer ─── */
+  .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 32px; padding: 56px 0 28px; border-top: 0.5px solid var(--line); }
+  @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+  .foot-col h6 { margin: 0 0 16px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+  .foot-col a { display: block; padding: 4px 0; font-size: 14px; color: var(--fg-2); }
+  .foot-col a:hover { color: var(--accent); }
+
+  /* ─── Wordmark ─── */
+  .wordmark { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.06em; line-height: 0.84; font-size: clamp(40px, 15vw, 200px); color: var(--fg); }
+
+  /* ─── Footer bar ─── */
+  .foot-bar { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding-top: 18px; }
+  @media (max-width: 640px) { .foot-bar { flex-direction: column; align-items: flex-start; gap: 12px; } }
+  .totop { display: inline-flex; align-items: center; gap: 10px; height: 40px; padding: 0 8px 0 16px; border: 0.5px solid var(--line); border-radius: 999px; font-family: var(--font-display); font-weight: 500; font-size: 13px; transition: border-color .25s, background-color .25s; }
+  .totop:hover { border-color: var(--fg); background: var(--soft); }
+  .totop .tt-ic { width: 26px; height: 26px; border-radius: 50%; background: var(--fg); color: var(--bg); display: grid; place-items: center; font-size: 13px; transition: transform .4s cubic-bezier(.2,.7,.2,1); }
+  .totop:hover .tt-ic { transform: translateY(-3px); }
+
+  /* ─── Tool wall ─── */
+  .tools { display: grid; grid-template-columns: repeat(6,1fr); gap: 0; border: 0.5px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .tools .tool { padding: 28px 20px; display: flex; align-items: center; justify-content: center; border-right: 0.5px solid var(--line); border-bottom: 0.5px solid var(--line); aspect-ratio: 1/1; background: var(--card); transition: background-color .3s, transform .3s; }
+  .tools .tool:nth-child(6n) { border-right: 0; }
+  .tools .tool:nth-last-child(-n+6) { border-bottom: 0; }
+  .tools .tool:hover { background: var(--bg-2); }
+  .tools .tool:hover img { transform: scale(1.08); }
+  .tools .tool img { transition: transform .35s cubic-bezier(.2,.7,.2,1); }
+  @media (max-width: 880px) {
+    .tools { grid-template-columns: repeat(4,1fr); }
+    .tools .tool:nth-child(6n) { border-right: 0.5px solid var(--line); }
+    .tools .tool:nth-child(4n) { border-right: 0; }
+    .tools .tool:nth-last-child(-n+6) { border-bottom: 0.5px solid var(--line); }
+    .tools .tool:nth-last-child(-n+4) { border-bottom: 0; }
+  }
+  @media (max-width: 560px) {
+    .tools { grid-template-columns: repeat(3,1fr); }
+    .tools .tool:nth-child(4n) { border-right: 0.5px solid var(--line); }
+    .tools .tool:nth-child(3n) { border-right: 0; }
+    .tools .tool:nth-last-child(-n+4) { border-bottom: 0.5px solid var(--line); }
+    .tools .tool:nth-last-child(-n+3) { border-bottom: 0; }
+    .tools .tool { aspect-ratio: unset; min-height: 72px; padding: 12px 8px; }
+  }
+
+  /* ─── Skill bars ─── */
+  .skill { padding: 15px 0; border-top: 0.5px solid var(--line-soft); }
+  .skill:first-child { border-top: 0; }
+  .skill-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+  .skill-label { font-family: var(--font-display); font-weight: 500; font-size: 15px; letter-spacing: -0.01em; }
+  .skill-pct { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+  .skill-track { height: 4px; background: var(--soft); border-radius: 99px; overflow: hidden; }
+  .skill-fill { height: 100%; background: var(--fg); border-radius: 99px; width: 0; transition: width 1.1s cubic-bezier(.2,.7,.2,1), background-color .3s; }
+  .skill:hover .skill-fill { background: var(--accent); }
+
+  /* ─── Counters ─── */
+  .counter-cell { padding: 20px 18px; border-right: 0.5px solid var(--line); display: flex; flex-direction: column; gap: 8px; }
+  .counter-cell:last-child { border-right: 0; }
+  .counter-cell .cv { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 3.6vw, 46px); letter-spacing: -0.04em; line-height: 1; }
+  .counter-cell .cv sup { color: var(--accent); font-size: 0.5em; vertical-align: super; }
+
+  /* ─── Cert strip ─── */
+  .cert-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 0.5px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .cert-cell { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; border-right: 0.5px solid var(--line); border-bottom: 0.5px solid var(--line); }
+  .cert-cell:nth-child(2n) { border-right: 0; }
+  .cert-cell:nth-last-child(-n+2) { border-bottom: 0; }
+  .cert-cell .cn { font-size: 14px; color: var(--fg-2); }
+  @media (max-width: 560px) { .cert-strip { grid-template-columns: 1fr; } .cert-cell { border-right: 0; } .cert-cell:nth-last-child(-n+2) { border-bottom: 0.5px solid var(--line); } .cert-cell:last-child { border-bottom: 0; } }
+
+  /* ─── About sticky layout (kept for reference but not used) ─── */
+  .about-split { display: grid; grid-template-columns: 4.4fr 6fr; gap: 56px; align-items: start; }
+  @media (max-width: 920px) { .about-split { grid-template-columns: 1fr; gap: 36px; } }
+  .about-sticky { position: sticky; top: 100px; }
+  @media (max-width: 920px) { .about-sticky { position: static; } }
+
+  /* ─── Journey timeline (defined, unused in current layout) ─── */
+  .journey-item { border-top: 0.5px solid var(--line); cursor: pointer; }
+  .journey-item:last-child { border-bottom: 0.5px solid var(--line); }
+  .journey-head { display: grid; grid-template-columns: 72px 1fr auto; gap: 20px; align-items: center; padding: 20px 4px; transition: padding .35s; }
+  .journey-item:hover .journey-head { padding-left: 16px; }
+  .journey-year { font-family: var(--font-mono); font-size: 12px; color: var(--accent); }
+  .journey-title { font-family: var(--font-display); font-weight: 500; font-size: 19px; letter-spacing: -0.015em; }
+  .journey-toggle { width: 28px; height: 28px; border-radius: 50%; border: 0.5px solid var(--line); display: grid; place-items: center; transition: transform .45s, background-color .3s, color .3s; font-size: 15px; line-height: 1; }
+  .journey-item.open .journey-toggle { transform: rotate(45deg); background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  .journey-body { max-height: 0; overflow: hidden; transition: max-height .55s; }
+  .journey-item.open .journey-body { max-height: 180px; }
+  .journey-body p { margin: 0; padding: 0 0 22px 92px; color: var(--muted); font-size: 14.5px; line-height: 1.6; max-width: 600px; }
+  @media (max-width: 560px) { .journey-head { grid-template-columns: 56px 1fr auto; } .journey-body p { padding-left: 0; } }
+
+  /* ─── Count ─── */
+  .count { font-variant-numeric: tabular-nums; }
+
+  /* ══════════════════════════════════════════
+     MOBILE RESPONSIVE — comprehensive fixes
+  ══════════════════════════════════════════ */
+
+  /* ── Hero ── */
+  @media (max-width: 640px) {
+    .hero-foot { margin-top: 36px !important; gap: 20px !important; }
+    .hero-foot p { font-size: 16px !important; }
+    .hero-foot .btn { width: 100%; justify-content: center; }
+    .hero-foot > div:last-child { display: flex; flex-direction: column; width: 100%; gap: 10px; }
+  }
+
+  /* ── About bento ── */
+  @media (max-width: 880px) {
+    .bento { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .bento .b { grid-column: span 1 !important; grid-row: span 1 !important; min-height: 140px; }
+  }
+  @media (max-width: 560px) {
+    .bento { grid-template-columns: 1fr; gap: 10px; }
+    .bento .b { grid-column: 1 !important; min-height: unset; }
+    .bento h4 { font-size: 16px !important; }
+    .bento p { font-size: 13.5px !important; }
+  }
+
+  /* ── Tool wall logos — scale down on mobile ── */
+  @media (max-width: 880px) {
+    .tools .tool img { max-width: 110px; height: auto; }
+  }
+  @media (max-width: 560px) {
+    .tools .tool { padding: 14px 10px; }
+    .tools .tool img { max-width: 72px; height: auto; }
+  }
+
+  /* ── Services ── */
+  @media (max-width: 640px) {
+    .svc-num { display: none; }
+    .svc-title { font-size: 19px !important; }
+    .svc-desc { font-size: 14px !important; }
+    .svc-row { gap: 10px !important; padding: 20px 0 !important; }
+  }
+
+  /* ── Work stacked cards ── */
+  @media (max-width: 880px) {
+    .stacked .m { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 640px) {
+    .stacked .m .meta { padding: 18px !important; gap: 12px !important; }
+    .stacked .m h3 { font-size: 20px !important; line-height: 1.15 !important; }
+    .stacked .m p { font-size: 14px !important; }
+    .mosaic { gap: 10px !important; }
+  }
+
+  /* ── Section head ── */
+  @media (max-width: 640px) {
+    .section-head-row { gap: 12px !important; margin-bottom: 32px !important; }
+    .section-head-row h2 { font-size: clamp(24px, 7vw, 40px) !important; }
+    .section-head-row p { font-size: 15px !important; margin-top: 12px !important; }
+  }
+
+  /* ── Contact ── */
+  @media (max-width: 640px) {
+    .contact-h { font-size: clamp(32px, 11vw, 72px) !important; }
+    .contact-inner > div > p { font-size: 15px !important; }
+    .contact-inner > div:last-child { padding: 20px !important; border-radius: 16px !important; }
+  }
+  @media (max-width: 480px) {
+    .form-row { grid-template-columns: 1fr !important; }
+  }
+
+  /* ── Wordmark ── */
+  @media (max-width: 640px) {
+    .wordmark { font-size: clamp(36px, 15vw, 120px) !important; letter-spacing: -0.05em !important; }
+  }
+
+  /* ── Footer ── */
+  @media (max-width: 640px) {
+    .footer-grid { padding: 36px 0 20px !important; gap: 24px !important; }
+    .foot-bar { flex-direction: column; align-items: flex-start; gap: 14px; padding-top: 16px; }
+    .totop { align-self: stretch; justify-content: space-between; }
+  }
+  @media (max-width: 480px) {
+    .footer-grid { grid-template-columns: 1fr !important; }
+  }
+
+  /* ── Counter cells ── */
+  @media (max-width: 480px) {
+    .counter-inner { grid-template-columns: 1fr 1fr; }
+    .counter-inner > div:nth-child(3) { border-top: 0.5px solid var(--line); border-left: none !important; }
+    .counter-cell { padding: 16px 12px; }
+  }
+
+  /* ── Tags wrap nicely ── */
+  @media (max-width: 480px) {
+    .tag { font-size: 9.5px !important; height: 24px !important; padding: 0 8px !important; }
+  }
+
+  /* ── Cert strip ── */
+  @media (max-width: 480px) {
+    .cert-strip { grid-template-columns: 1fr; }
+    .cert-cell { border-right: 0 !important; }
+    .cert-cell:nth-last-child(-n+2) { border-bottom: 0.5px solid var(--line) !important; }
+    .cert-cell:last-child { border-bottom: 0 !important; }
+  }
+
+  /* ── Section padding ── */
+  @media (max-width: 480px) {
+    .section { padding: 52px 0 !important; }
+  }
+</style>
+</head>
+<body data-cursor="on">
+<div id="root"></div>
+
+<script>
+  const TWEAK_DEFAULTS = {
+    "theme": "light",
+    "cursor": false,
+    "workLayout": "stacked",
+    "heroMotif": "grid",
+    "typePair": "grotesque"
+  };
+</script>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<!-- ═══════════════ TWEAKS PANEL ═══════════════ -->
+<script type="text/babel">
+const __TWEAKS_STYLE = `
+  .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
+    max-height:calc(100vh - 32px);display:flex;flex-direction:column;
+    transform:scale(var(--dc-inv-zoom,1));transform-origin:bottom right;
+    background:rgba(250,249,247,.78);color:#29261b;
+    -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+    border:.5px solid rgba(255,255,255,.6);border-radius:14px;
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);
+    font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
+  .twk-hd{display:flex;align-items:center;justify-content:space-between;
+    padding:10px 8px 10px 14px;cursor:move;user-select:none}
+  .twk-hd b{font-size:12px;font-weight:600;letter-spacing:.01em}
+  .twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);
+    width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}
+  .twk-x:hover{background:rgba(0,0,0,.06);color:#29261b}
+  .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;
+    overflow-y:auto;overflow-x:hidden;min-height:0;
+    scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.15) transparent}
+  .twk-body::-webkit-scrollbar{width:8px}
+  .twk-body::-webkit-scrollbar-track{background:transparent;margin:2px}
+  .twk-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:4px;border:2px solid transparent;background-clip:content-box}
+  .twk-row{display:flex;flex-direction:column;gap:5px}
+  .twk-row-h{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+  .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;color:rgba(41,38,27,.72)}
+  .twk-lbl>span:first-child{font-weight:500}
+  .twk-val{color:rgba(41,38,27,.5);font-variant-numeric:tabular-nums}
+  .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:rgba(41,38,27,.45);padding:10px 0 0}
+  .twk-sect:first-child{padding-top:0}
+  .twk-field{appearance:none;box-sizing:border-box;width:100%;min-width:0;height:26px;padding:0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;
+    background:rgba(255,255,255,.6);color:inherit;font:inherit;outline:none}
+  .twk-field:focus{border-color:rgba(0,0,0,.25);background:rgba(255,255,255,.85)}
+  select.twk-field{padding-right:22px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='rgba(0,0,0,.5)' d='M0 0h10L5 6z'/></svg>");
+    background-repeat:no-repeat;background-position:right 8px center}
+  .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:4px;margin:6px 0;
+    border-radius:999px;background:rgba(0,0,0,.12);outline:none}
+  .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+  .twk-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#fff;border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+  .twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;background:rgba(0,0,0,.06);user-select:none}
+  .twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}
+  .twk-seg.dragging .twk-seg-thumb{transition:none}
+  .twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2;overflow-wrap:anywhere}
+  .twk-toggle{position:relative;width:32px;height:18px;border:0;border-radius:999px;background:rgba(0,0,0,.15);transition:background .15s;cursor:default;padding:0}
+  .twk-toggle[data-on="1"]{background:#34c759}
+  .twk-toggle i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+  .twk-toggle[data-on="1"] i{transform:translateX(14px)}
+  .twk-btn{appearance:none;height:26px;padding:0 12px;border:0;border-radius:7px;background:rgba(0,0,0,.78);color:#fff;font:inherit;font-weight:500;cursor:default}
+  .twk-btn:hover{background:rgba(0,0,0,.88)}
+  .twk-btn.secondary{background:rgba(0,0,0,.06);color:inherit}
+  .twk-btn.secondary:hover{background:rgba(0,0,0,.1)}
+  .twk-chips{display:flex;gap:6px}
+  .twk-chip{position:relative;appearance:none;flex:1;min-width:0;height:46px;padding:0;border:0;border-radius:6px;overflow:hidden;cursor:default;box-shadow:0 0 0 .5px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.06);transition:transform .12s,box-shadow .12s}
+  .twk-chip[data-on="1"]{box-shadow:0 0 0 1.5px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.15)}
+  .twk-chip>span{position:absolute;top:0;bottom:0;right:0;width:34%;display:flex;flex-direction:column;box-shadow:-1px 0 0 rgba(0,0,0,.1)}
+  .twk-chip>span>i{flex:1;box-shadow:0 -1px 0 rgba(0,0,0,.1)}
+  .twk-chip>span>i:first-child{box-shadow:none}
+  .twk-chip svg{position:absolute;top:6px;left:6px;width:13px;height:13px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+`;
+
+function useTweaks(defaults) {
+  const [values, setValues] = React.useState(defaults);
+  const setTweak = React.useCallback((keyOrEdits, val) => {
+    const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null ? keyOrEdits : { [keyOrEdits]: val };
+    setValues(prev => ({ ...prev, ...edits }));
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+    window.dispatchEvent(new CustomEvent('tweakchange', { detail: edits }));
+  }, []);
+  return [values, setTweak];
+}
+
+function TweaksPanel({ title = 'Tweaks', children }) {
+  const [open, setOpen] = React.useState(false);
+  const dragRef = React.useRef(null);
+  const offsetRef = React.useRef({ x: 16, y: 16 });
+  const PAD = 16;
+  const clampToViewport = React.useCallback(() => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const w = panel.offsetWidth, h = panel.offsetHeight;
+    offsetRef.current = {
+      x: Math.min(Math.max(PAD, window.innerWidth - w - PAD), Math.max(PAD, offsetRef.current.x)),
+      y: Math.min(Math.max(PAD, window.innerHeight - h - PAD), Math.max(PAD, offsetRef.current.y)),
+    };
+    panel.style.right = offsetRef.current.x + 'px';
+    panel.style.bottom = offsetRef.current.y + 'px';
+  }, []);
+  React.useEffect(() => {
+    if (!open) return;
+    clampToViewport();
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(clampToViewport) : null;
+    if (ro) { ro.observe(document.documentElement); return () => ro.disconnect(); }
+    window.addEventListener('resize', clampToViewport);
+    return () => window.removeEventListener('resize', clampToViewport);
+  }, [open, clampToViewport]);
+  React.useEffect(() => {
+    const onMsg = e => {
+      if (e?.data?.type === '__activate_edit_mode') setOpen(true);
+      else if (e?.data?.type === '__deactivate_edit_mode') setOpen(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+  const dismiss = () => { setOpen(false); window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*'); };
+  const onDragStart = e => {
+    const panel = dragRef.current; if (!panel) return;
+    const r = panel.getBoundingClientRect();
+    const sx = e.clientX, sy = e.clientY, startRight = window.innerWidth - r.right, startBottom = window.innerHeight - r.bottom;
+    const move = ev => { offsetRef.current = { x: startRight - (ev.clientX - sx), y: startBottom - (ev.clientY - sy) }; clampToViewport(); };
+    const up = () => { window.removeEventListener('mousemove', move); window.removeEventListener('mouseup', up); };
+    window.addEventListener('mousemove', move); window.addEventListener('mouseup', up);
+  };
+  if (!open) return null;
+  return (
+    <>
+      <style>{__TWEAKS_STYLE}</style>
+      <div ref={dragRef} className="twk-panel" data-omelette-chrome="" style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
+        <div className="twk-hd" onMouseDown={onDragStart}>
+          <b>{title}</b>
+          <button className="twk-x" aria-label="Close tweaks" onMouseDown={e => e.stopPropagation()} onClick={dismiss}>✕</button>
+        </div>
+        <div className="twk-body">{children}</div>
+      </div>
+    </>
+  );
+}
+function TweakSection({ label, children }) { return <><div className="twk-sect">{label}</div>{children}</>; }
+function TweakRow({ label, value, children, inline = false }) {
+  return (
+    <div className={inline ? 'twk-row twk-row-h' : 'twk-row'}>
+      <div className="twk-lbl"><span>{label}</span>{value != null && <span className="twk-val">{value}</span>}</div>
+      {children}
+    </div>
+  );
+}
+function TweakSlider({ label, value, min=0, max=100, step=1, unit='', onChange }) {
+  return <TweakRow label={label} value={`${value}${unit}`}><input type="range" className="twk-slider" min={min} max={max} step={step} value={value} onChange={e => onChange(Number(e.target.value))} /></TweakRow>;
+}
+function TweakToggle({ label, value, onChange }) {
+  return <div className="twk-row twk-row-h"><div className="twk-lbl"><span>{label}</span></div><button type="button" className="twk-toggle" data-on={value?'1':'0'} role="switch" aria-checked={!!value} onClick={() => onChange(!value)}><i/></button></div>;
+}
+function TweakSelect({ label, value, options, onChange }) {
+  return <TweakRow label={label}><select className="twk-field" value={value} onChange={e => onChange(e.target.value)}>{options.map(o => { const v = typeof o==='object'?o.value:o; const l = typeof o==='object'?o.label:o; return <option key={v} value={v}>{l}</option>; })}</select></TweakRow>;
+}
+function TweakRadio({ label, value, options, onChange }) {
+  const trackRef = React.useRef(null);
+  const [dragging, setDragging] = React.useState(false);
+  const valueRef = React.useRef(value); valueRef.current = value;
+  const labelLen = o => String(typeof o==='object'?o.label:o).length;
+  const maxLen = options.reduce((m,o) => Math.max(m,labelLen(o)),0);
+  const fitsAsSegments = maxLen <= ({2:16,3:10}[options.length] ?? 0);
+  if (!fitsAsSegments) {
+    const resolve = s => { const m = options.find(o => String(typeof o==='object'?o.value:o)===s); return m===undefined?s:typeof m==='object'?m.value:m; };
+    return <TweakSelect label={label} value={value} options={options} onChange={s => onChange(resolve(s))} />;
+  }
+  const opts = options.map(o => typeof o==='object'?o:{value:o,label:o});
+  const idx = Math.max(0, opts.findIndex(o => o.value===value));
+  const n = opts.length;
+  const segAt = clientX => { const r = trackRef.current.getBoundingClientRect(); const inner = r.width-4; const i = Math.floor(((clientX-r.left-2)/inner)*n); return opts[Math.max(0,Math.min(n-1,i))].value; };
+  const onPointerDown = e => {
+    setDragging(true);
+    const v0 = segAt(e.clientX); if (v0!==valueRef.current) onChange(v0);
+    const move = ev => { if (!trackRef.current) return; const v = segAt(ev.clientX); if (v!==valueRef.current) onChange(v); };
+    const up = () => { setDragging(false); window.removeEventListener('pointermove',move); window.removeEventListener('pointerup',up); };
+    window.addEventListener('pointermove',move); window.addEventListener('pointerup',up);
+  };
+  return (
+    <TweakRow label={label}>
+      <div ref={trackRef} role="radiogroup" onPointerDown={onPointerDown} className={dragging?'twk-seg dragging':'twk-seg'}>
+        <div className="twk-seg-thumb" style={{left:`calc(2px + ${idx}*(100% - 4px)/${n})`,width:`calc((100% - 4px)/${n})`}} />
+        {opts.map(o => <button key={o.value} type="button" role="radio" aria-checked={o.value===value}>{o.label}</button>)}
+      </div>
+    </TweakRow>
+  );
+}
+function TweakButton({ label, onClick, secondary=false }) {
+  return <button type="button" className={secondary?'twk-btn secondary':'twk-btn'} onClick={onClick}>{label}</button>;
+}
+Object.assign(window, { useTweaks, TweaksPanel, TweakSection, TweakRow, TweakSlider, TweakToggle, TweakRadio, TweakSelect, TweakButton });
+</script>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<script type="text/babel">
+const { useEffect, useRef, useState } = React;
+
+function GridCanvas() {
+  const ref = useRef(null);
+  const mouse = useRef({ x: -9999, y: -9999 });
+  const targets = useRef({ x: 0, y: 0 });
+  useEffect(() => {
+    const canvas = ref.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let raf, w, h, dpr;
+    const dots = [];
+    const spacing = 28, radius = 1.1, influence = 180;
+    function resize() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = rect.width; h = rect.height;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      canvas.style.width = w + "px"; canvas.style.height = h + "px";
+      ctx.scale(dpr, dpr);
+      dots.length = 0;
+      const cols = Math.ceil(w / spacing) + 1;
+      const rows = Math.ceil(h / spacing) + 1;
+      for (let i = 0; i < cols; i++)
+        for (let j = 0; j < rows; j++)
+          dots.push({ x: i*spacing, y: j*spacing, ox: i*spacing, oy: j*spacing });
+    }
+    function onMove(e) {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      targets.current.x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+      targets.current.y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+    }
+    function onLeave() { targets.current.x = -9999; targets.current.y = -9999; }
+    function loop() {
+      mouse.current.x += (targets.current.x - mouse.current.x) * 0.12;
+      mouse.current.y += (targets.current.y - mouse.current.y) * 0.12;
+      ctx.clearRect(0, 0, w, h);
+      const mx = mouse.current.x, my = mouse.current.y;
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      const baseAlpha = isDark ? 0.18 : 0.14;
+      for (let d of dots) {
+        const dx = d.x - mx, dy = d.y - my;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < influence) {
+          const t = 1 - dist / influence;
+          const push = t * 14, ang = Math.atan2(dy, dx);
+          d.x += (d.ox + Math.cos(ang)*push - d.x) * 0.18;
+          d.y += (d.oy + Math.sin(ang)*push - d.y) * 0.18;
+          const r = radius + t * 2.2;
+          ctx.fillStyle = t > 0.55
+            ? `rgba(20,110,245,${0.95 * (t - 0.4)})`
+            : isDark ? `rgba(244,242,236,${baseAlpha + t*0.5})` : `rgba(10,10,10,${baseAlpha + t*0.5})`;
+          ctx.beginPath(); ctx.arc(d.x, d.y, r, 0, Math.PI*2); ctx.fill();
+        } else {
+          d.x += (d.ox - d.x) * 0.08; d.y += (d.oy - d.y) * 0.08;
+          ctx.fillStyle = isDark ? `rgba(244,242,236,${baseAlpha})` : `rgba(10,10,10,${baseAlpha})`;
+          ctx.beginPath(); ctx.arc(d.x, d.y, radius, 0, Math.PI*2); ctx.fill();
+        }
+      }
+      raf = requestAnimationFrame(loop);
+    }
+    resize();
+    window.addEventListener("resize", resize);
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseleave", onLeave);
+    loop();
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", resize); window.removeEventListener("mousemove", onMove); window.removeEventListener("mouseleave", onLeave); };
+  }, []);
+  return <canvas ref={ref} className="grid-canvas" aria-hidden="true" />;
+}
+
+function FloatTag({ children, style, delay = 0 }) {
+  return (
+    <div className="float-tag" style={{ animationDelay: `${delay}s`, ...style }}>
+      <span className="fdot" />{children}
+    </div>
+  );
+}
+
+function Capabilities() {
+  const caps = ["Webflow Development","Enterprise Scale","Custom Code","CMS Architecture","Integrations","Zapier · Make · n8n","Performance","SEO & GA4","Memberstack","Xano","Airtable","HubSpot"];
+  return (
+    <div className="marquee-row" style={{ padding: "18px 0" }}>
+      <div className="marquee">
+        {[...caps, ...caps].map((c, i) =>
+          <span key={i} className="mono" style={{ display: "inline-flex", alignItems: "center", gap: 12 }}>
+            <span style={{ color: "var(--accent)" }}>●</span>{c}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Hero({ motif }) {
+  const headline = <>Sagar Panchal<br />Webflow Developer &amp; Designer<span style={{ color: "var(--accent)" }}>.</span></>;
+  return (
+    <section id="hero" style={{ position: "relative", minHeight: "100svh", paddingTop: "clamp(80px, 14vw, 120px)", paddingBottom: "clamp(40px, 6vw, 60px)", display: "flex", flexDirection: "column", justifyContent: "center", overflow: "hidden", borderBottom: "0.5px solid var(--line)" }}>
+      {motif === "grid" && <GridCanvas />}
+      {motif === "object" && <>
+        <div className="orb" style={{ width: 720, height: 720, right: "-180px", top: "-120px" }} />
+        <div className="orb" style={{ width: 520, height: 520, left: "-160px", bottom: "-180px", animationDelay: "-7s" }} />
+      </>}
+      <div className="wrap" style={{ position: "relative", zIndex: 2 }}>
+        <div className="reveal in" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 80, gap: 16, flexWrap: "wrap" }}>
+          <span className="eyebrow">Your Webflow Partner</span>
+          <span className="pill"><span className="dot" />Open for work</span>
+        </div>
+        {motif === "marquee" ? <MarqueeHero /> : motif === "bento" ? <BentoHero headline={headline} /> : <DefaultHero headline={headline} />}
+      </div>
+      <div style={{ position: "relative", zIndex: 2, marginTop: 60, borderTop: "0.5px solid var(--line)", borderBottom: "0.5px solid var(--line)" }}>
+        <Capabilities />
+      </div>
+    </section>
+  );
+}
+
+function DefaultHero({ headline }) {
+  return (
+    <>
+      <h1 className="display" style={{ margin: 0, maxWidth: "1200px", fontSize: "clamp(40px, 9.5vw, 120px)", color: "var(--fg)" }}>
+        {headline}
+      </h1>
+      <div className="hero-foot">
+        <p style={{ margin: 0, fontSize: 18, lineHeight: 1.55, color: "var(--muted)", maxWidth: 520 }}>
+          I'm <span style={{ fontWeight: 500, color: "var(--accent)" }}>Sagar Panchal</span>, a Webflow developer &amp; designer building refined, conversion-focused marketing sites and product experiences for enterprises and high-growth startups.
+        </p>
+        <div style={{ display: "flex", gap: 12, justifyContent: "flex-end", flexWrap: "wrap" }}>
+          <MagneticButton href="#contact" className="btn btn-primary">Start a project <span className="arrow">↗</span></MagneticButton>
+          <MagneticButton href="#work" className="btn btn-secondary">View selected work</MagneticButton>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function MarqueeHero() {
+  const words = ["Webflow.","Enterprise.","Marketing.","Custom Code.","Integrations.","Automation.","Performance."];
+  return (
+    <div>
+      <p className="mono" style={{ marginBottom: 24 }}>// I build —</p>
+      <div style={{ overflow: "hidden", marginLeft: -8 }}>
+        <div className="marquee" style={{ animationDuration: "28s" }}>
+          {[...words,...words].map((w, i) =>
+            <span key={i} className="display" style={{ fontSize: "clamp(52px, 10vw, 180px)", color: i%7===5?"var(--accent)":"var(--fg)", paddingRight: 60, lineHeight: 0.95 }}>{w}</span>
+          )}
+        </div>
+      </div>
+      <p className="mono" style={{ marginTop: 24, textAlign: "right" }}>— for ambitious teams.</p>
+      <div style={{ display: "flex", gap: 12, marginTop: 56, justifyContent: "center", flexWrap: "wrap" }}>
+        <MagneticButton href="#contact" className="btn btn-primary">Start a project <span className="arrow">↗</span></MagneticButton>
+        <MagneticButton href="#work" className="btn btn-secondary">View selected work</MagneticButton>
+      </div>
+    </div>
+  );
+}
+
+function BentoHero({ headline }) {
+  return (
+    <div style={{ position: "relative" }}>
+      <h1 className="display" style={{ margin: 0, fontSize: "clamp(40px, 7.6vw, 132px)", maxWidth: 980 }}>{headline}</h1>
+      <p style={{ margin: "32px 0 0", fontSize: 18, lineHeight: 1.55, color: "var(--muted)", maxWidth: 520 }}>
+        Webflow development, custom integrations, and automation systems for enterprises and high-growth startups.
+      </p>
+      <div style={{ display: "flex", gap: 12, marginTop: 36, flexWrap: "wrap" }}>
+        <MagneticButton href="#contact" className="btn btn-primary">Start a project <span className="arrow">↗</span></MagneticButton>
+        <MagneticButton href="#work" className="btn btn-secondary">View work</MagneticButton>
+      </div>
+      <FloatTag style={{ right: "8%", top: "8%", animationDelay: "-1s" }}>Webflow Expert</FloatTag>
+      <FloatTag style={{ right: "20%", top: "44%", animationDelay: "-3s" }}>Memberstack · Xano</FloatTag>
+      <FloatTag style={{ right: "4%", top: "70%", animationDelay: "-5s" }}>Performance · 98 PSI</FloatTag>
+      <FloatTag style={{ right: "30%", top: "20%", animationDelay: "-2s" }}>Zapier · Make · n8n</FloatTag>
+    </div>
+  );
+}
+
+function MagneticButton({ href, onClick, className, children, ...rest }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    function onMove(e) {
+      const r = el.getBoundingClientRect();
+      const x = e.clientX - (r.left + r.width/2), y = e.clientY - (r.top + r.height/2);
+      el.style.transform = `translate(${x*0.25}px,${y*0.25}px)`;
+    }
+    function onLeave() { el.style.transform = "translate(0,0)"; }
+    el.addEventListener("mousemove", onMove);
+    el.addEventListener("mouseleave", onLeave);
+    return () => { el.removeEventListener("mousemove", onMove); el.removeEventListener("mouseleave", onLeave); };
+  }, []);
+  if (href) return <a ref={ref} href={href} className={className} {...rest}>{children}</a>;
+  return <button ref={ref} onClick={onClick} className={className} {...rest}>{children}</button>;
+}
+
+Object.assign(window, { Hero, MagneticButton, GridCanvas, Capabilities });
+</script>
+
+<!-- ═══════════════ SECTIONS ═══════════════ -->
+<script type="text/babel">
+
+function useReveal() {
+  React.useEffect(() => {
+    const els = document.querySelectorAll(".reveal:not(.in)");
+    if (!("IntersectionObserver" in window)) { els.forEach(e => e.classList.add("in")); return; }
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -10% 0px" });
+    els.forEach(e => io.observe(e));
+    return () => io.disconnect();
+  });
+}
+
+function SectionHead({ index, label, title, sub }) {
+  return (
+    <div className="reveal section-head-row">
+      <div className="mono" style={{ display: "flex", flexDirection: "column", gap: 6, minWidth: 120 }}>
+        <span>{index}</span>
+        <span style={{ color: "var(--fg-2)" }}>{label}</span>
+      </div>
+      <div>
+        <h2 className="display" style={{ margin: 0, maxWidth: 980, fontSize: "clamp(28px, 4.5vw, 60px)", lineHeight: 1 }}>{title}</h2>
+        {sub && <p style={{ margin: "20px 0 0", color: "var(--muted)", fontSize: 17, maxWidth: 620 }}>{sub}</p>}
+      </div>
+    </div>
+  );
+}
+
+function AnimatedCounter({ to, duration = 1500 }) {
+  const ref = React.useRef(null);
+  const [val, setVal] = React.useState(0);
+  React.useEffect(() => {
+    const el = ref.current; if (!el) return;
+    let done = false;
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting && !done) {
+          done = true;
+          const start = performance.now();
+          const step = now => {
+            const t = Math.min((now - start)/duration, 1);
+            setVal(Math.round((1 - Math.pow(1-t, 3)) * to));
+            if (t < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        }
+      });
+    }, { threshold: 0.5 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [to, duration]);
+  return <span ref={ref}>{val}</span>;
+}
+
+function SkillBar({ label, pct }) {
+  const ref = React.useRef(null);
+  const [w, setW] = React.useState(0);
+  React.useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => { if (en.isIntersecting) { setW(pct); io.disconnect(); } });
+    }, { threshold: 0.4 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [pct]);
+  return (
+    <div className="skill" ref={ref}>
+      <div className="skill-head">
+        <span className="skill-label">{label}</span>
+        <span className="skill-pct">{pct}%</span>
+      </div>
+      <div className="skill-track"><div className="skill-fill" style={{ width: w + "%" }} /></div>
+    </div>
+  );
+}
+
+const TOOL_LOGOS = {
+  Webflow:   "webflow logo.svg",
+  Framer:    "framer.png",
+  ClickUp:   "ClickUp_Logo.png",
+  Notion:    "Notion_logo.png",
+  Clarity:   "MICROSOFT-CLARITY-LOGO.webp",
+  HubSpot:   "HubSpot_Logo.png",
+  Zapier:    "zapier.svg",
+  "Make.com":"Make-Logo-RGB@2x-1.webp",
+  n8n:       "N8n-logo-new.svg",
+  GA4:       "Logo_Google_Analytics.png",
+  GTM:       "google tag manager.png",
+  Figma:     "Figma-Logo.png",
+};
+
+function ToolGlyph({ name }) {
+  const src = TOOL_LOGOS[name];
+  return (
+    <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", padding: "12px 16px" }}>
+      {src
+        ? <img src={src} alt={name} style={{ width: "100%", maxWidth: 150, height: 56, objectFit: "contain", display: "block" }} />
+        : <div style={{ width: 36, height: 36, borderRadius: 8, background: "var(--fg)", opacity: 0.15 }} />
+      }
+    </div>
+  );
+}
+
+function About() {
+  return (
+    <section id="about" className="section" style={{ background: "var(--bg)" }}>
+      <div className="wrap">
+        <SectionHead
+          index="/ 01" label="About"
+          title={<>A senior Webflow developer building<br />refined, scalable web systems.</>}
+          sub="Three years deep in Webflow. I partner with founders, marketing teams and agencies to design and ship marketing sites, product experiences, and the integrations that keep them running."
+        />
+        <div className="bento reveal">
+          {/* Portrait + bio */}
+          <div className="b" style={{ gridColumn:"span 5", gridRow:"span 2", padding:0, overflow:"hidden", display:"flex", flexDirection:"column" }}>
+            <div className="ph" style={{ flex:1, minHeight:280, borderRadius:0, backgroundColor:"rgb(255,252,241)" }}>
+              <span className="ph-label">portrait · 4:5</span>
+            </div>
+            <div style={{ padding:24, display:"flex", flexDirection:"column", gap:14 }}>
+              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"baseline" }}>
+                <h4 style={{ margin:0, fontSize:22, fontFamily:"var(--font-display)", fontWeight:500, letterSpacing:"-0.02em" }}>Sagar Panchal</h4>
+                <span className="pill" style={{ height:24 }}><span className="dot"/>Open</span>
+              </div>
+              <p style={{ margin:0, color:"var(--muted)", fontSize:14.5 }}>A Webflow developer &amp; designer who treats marketing sites like products — building enterprise-grade sites, CMS architectures and automations that scale past launch.</p>
+            </div>
+          </div>
+
+          {/* Counters */}
+          <div className="b" style={{ gridColumn:"span 7", padding:0, justifyContent:"stretch" }}>
+            <div className="counter-inner">
+              {[
+                { v:3, sup:"+", l:"Years building" },
+                { v:25, sup:"+", l:"Projects shipped" },
+                { v:98, sup:"", l:"Avg PageSpeed" },
+              ].map((c, i) =>
+                <div key={c.l} className="counter-cell" style={{ borderLeft: i ? "0.5px solid var(--line)" : "none" }}>
+                  <span className="mono">{String(i+1).padStart(2,"0")}</span>
+                  <div>
+                    <div className="display cv" style={{ fontSize:"clamp(28px, 3.6vw, 46px)", lineHeight:0.9, letterSpacing:"-0.04em" }}>
+                      <AnimatedCounter to={c.v}/><span style={{ color:"var(--accent)", fontSize:"0.5em", verticalAlign:"super" }}>{c.sup}</span>
+                    </div>
+                    <span className="mono" style={{ display:"block", marginTop:10 }}>{c.l}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Skill bars */}
+          <div className="b" style={{ gridColumn:"span 4" }}>
+            <span className="mono" style={{ marginBottom:16 }}>Where I'm strongest</span>
+            <div>
+              <SkillBar label="Webflow Development" pct={98} />
+              <SkillBar label="CMS Architecture" pct={95} />
+              <SkillBar label="Performance & SEO" pct={92} />
+            </div>
+          </div>
+
+          {/* Core craft chips */}
+          <div className="b" style={{ gridColumn:"span 3" }}>
+            <span className="mono" style={{ marginBottom:16 }}>Core craft</span>
+            <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
+              {["Webflow","Custom Code","API Integrations","AI Automations","SEO","Tracking","Analytics"].map(t =>
+                <span className="tag" key={t}>{t}</span>
+              )}
+            </div>
+          </div>
+
+          {/* Certifications */}
+          <div className="b" style={{ gridColumn:"span 7" }}>
+            <span className="mono" style={{ marginBottom:16 }}>Certified</span>
+            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0 32px" }}>
+              {["Webflow Expert","HubSpot CMS Developer","Webflow Ecommerce","GA4 Certified"].map(c =>
+                <div key={c} style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"12px 0", borderBottom:"0.5px solid var(--line-soft)" }}>
+                  <span style={{ fontSize:14, color:"var(--fg-2)" }}>{c}</span>
+                  <span className="mono" style={{ color:"var(--accent)" }}>✓</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Approach card */}
+          <div className="b" style={{ gridColumn:"span 5", background:"var(--fg)", color:"var(--bg)", borderColor:"var(--fg)" }}>
+            <span className="mono" style={{ color:"rgba(200,200,200,0.7)" }}>Approach</span>
+            <h4 style={{ color:"var(--bg)", fontSize:20, lineHeight:1.2 }}>Strategy, design, build and automation — one craftsman, end&nbsp;to&nbsp;end.</h4>
+          </div>
+        </div>
+
+        {/* Tool wall */}
+        <div className="reveal" style={{ marginTop:64 }}>
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"baseline", marginBottom:20 }}>
+            <span className="mono">Stack · tools &amp; platforms</span>
+            <span className="mono">12 / 12</span>
+          </div>
+          <div className="tools">
+            {[
+              "Webflow", "Framer", "ClickUp", "Notion",
+              "Clarity", "HubSpot", "Zapier", "Make.com",
+              "n8n", "GA4", "GTM", "Figma",
+            ].map(name =>
+              <div className="tool" key={name}>
+                <ToolGlyph name={name} />
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Services() {
+  const items = [
+    { n:"01", t:"Enterprise Webflow Development", d:"Multi-region marketing sites and complex CMS architectures, engineered for scale. Style systems, component libraries, and editorial workflows your team can actually operate.", tags:["Webflow","CMS","Multi-region","Localization","Style Systems"] },
+    { n:"02", t:"Marketing Sites & Landing Pages", d:"Conversion-focused marketing sites for SaaS and product launches. Custom interactions, performance-tuned, A/B test-ready and tightly integrated with your stack.", tags:["SaaS","Conversion","A/B Testing","Webflow"] },
+    { n:"03", t:"Custom Code & Integrations", d:"Bespoke JavaScript modules, custom CMS extensions, GSAP/Lenis interaction work, and tight integrations with Memberstack, Xano, Airtable, HubSpot and your data layer.", tags:["JavaScript","Memberstack","Xano","Airtable","HubSpot"] },
+    { n:"04", t:"Automation & Workflow Systems", d:"Zapier, Make.com and n8n workflows that connect your CMS to CRM, billing, ops and analytics. Lead routing, content sync, form intelligence — wired end-to-end.", tags:["Zapier","Make.com","n8n","GA4","GTM"] },
+  ];
+  return (
+    <section id="services" className="section" style={{ borderTop:"0.5px solid var(--line)" }}>
+      <div className="wrap">
+        <SectionHead index="/ 02" label="Services" title={<>What I ship<span style={{ color:"var(--accent)" }}>.</span></>} sub="Four practices, woven together. Every engagement is custom — the throughline is craft, performance and a Webflow build that holds up at scale." />
+        <div className="reveal">
+          {items.map(s =>
+            <div className="svc-row" key={s.n}>
+              <div className="svc-num">{s.n}</div>
+              <div className="svc-title">{s.t}</div>
+              <div>
+                <p className="svc-desc">{s.d}</p>
+                <div className="svc-tags">{s.tags.map(tg => <span key={tg} className="tag">{tg}</span>)}</div>
+              </div>
+              <a href="#contact" className="ulink mono" style={{ alignSelf:"center", paddingTop:8, color:"var(--fg-2)", whiteSpace:"nowrap" }}>Enquire ↗</a>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const PROJECTS = [
+  { id:"phi", client:"Phi Designs", title:"Premium office interiors — marketing site.", sub:"A marketing engagement focused on Webflow CMS migration and portfolio architecture across 13 collections.", tags:["Webflow","CMS","Integrations & Automations"], year:"2025", metric:"90+ PageSpeed · 150+ pages", size:"lg", img:"Phi _ Browser_ centered.png" },
+  { id:"devx", client:"DevX", title:"Managed office spaces — marketing website.", sub:"Landing page optimisation and GTM setup for call-button conversion tracking across campaigns.", tags:["Webflow","CMS","Integrations & Automations"], year:"2025", metric:"250+ blogs · 200+ pages", size:"md", img:"DevX _ Browser_ centered.png" },
+  { id:"northwind", client:"Momentum91", title:"Digital product agency — marketing site.", sub:"Webflow site build, CMS structure and brand presence for the agency — plus client projects delivered across Webflow, automation and growth.", tags:["Webflow","Custom Code","Integrations & Automations"], year:"2026", metric:"90+ PageSpeed · 5+ client projects", accent:false, size:"lg", img:"momentum91.png" },
+  { id:"allevents", client:"AllEvents", title:"Ad landing page for global events platform.", sub:"A conversion-focused landing page built on Webflow for paid ad campaigns, optimised for speed and lead capture.", tags:["Webflow","Landing Page","Ads"], year:"2025", metric:"90+ PageSpeed", accent:false, size:"md", img:"AllEvents _ Browser_ centered.png" },
+];
+
+function Work({ layout }) {
+  return (
+    <section id="work" className="section" style={{ borderTop:"0.5px solid var(--line)" }}>
+      <div className="wrap">
+        <SectionHead index="/ 03" label="Selected work" title={<>Recent engagements,<br />shipped &amp; in flight<span style={{ color:"var(--accent)" }}>.</span></>} sub="A selection from the past three years — enterprise CMS, marketing sites, customer portals and migrations. NDA work available on request." />
+        {layout === "list" && <WorkList />}
+        {layout === "mosaic" && <WorkMosaic />}
+        {layout === "stacked" && <WorkStacked />}
+        <div className="reveal" style={{ marginTop:56, display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:16 }}>
+          <span className="mono">Working with: Solo founders → Series C → Enterprise</span>
+          <MagneticButton href="#contact" className="btn btn-secondary">Discuss your project <span className="arrow">↗</span></MagneticButton>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProjectCard({ p, colSpan = 6, aspect = "16/10" }) {
+  return (
+    <a className="m" href="#" style={{ gridColumn:`span ${colSpan}` }}>
+      <div className="img" style={{ aspectRatio:aspect }}>
+        {p.img
+          ? <img src={p.img} alt={p.client} style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+          : <div className="ph" style={{ width:"100%", height:"100%", borderRadius:0, background: p.accent ? "linear-gradient(135deg,#146EF5 0%,#4d92ff 100%)" : "var(--bg-2)" }}>
+              {p.accent
+                ? <div style={{ position:"absolute", inset:0, display:"flex", alignItems:"center", justifyContent:"center", color:"rgba(255,255,255,.95)", fontFamily:"var(--font-display)", fontWeight:500, fontSize:"clamp(32px,5vw,64px)", letterSpacing:"-0.04em" }}>{p.client}</div>
+                : <span className="ph-label">{p.client} · screenshot</span>
+              }
+            </div>
+        }
+        <div style={{ position:"absolute", top:16, left:16, display:"flex", gap:6, zIndex:2 }}>
+          {p.tags.slice(0,2).map(t => <span key={t} className="tag" style={{ background:"var(--card)" }}>{t}</span>)}
+        </div>
+        <div style={{ position:"absolute", top:16, right:16, zIndex:2 }}>
+          <span className="tag" style={{ background:"var(--card)" }}>{p.year}</span>
+        </div>
+      </div>
+      <div className="meta">
+        <div className="row"><span className="mono">{p.client}</span><span className="mono" style={{ color:"var(--accent)" }}>{p.metric}</span></div>
+        <h3>{p.title}</h3>
+        <div className="row">
+          <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>{p.tags.map(t => <span key={t} className="tag">{t}</span>)}</div>
+          <span style={{ fontFamily:"var(--font-display)", fontSize:13, color:"var(--fg-2)" }}>Open ↗</span>
+        </div>
+      </div>
+    </a>
+  );
+}
+
+function WorkMosaic() {
+  const explicit = [
+    { p:PROJECTS[0], col:7, ratio:"16/9" },
+    { p:PROJECTS[1], col:5, ratio:"16/9" },
+    { p:PROJECTS[2], col:5, ratio:"16/9" },
+    { p:PROJECTS[3], col:7, ratio:"16/9" },
+    { p:PROJECTS[4], col:6, ratio:"16/9" },
+    { p:PROJECTS[5], col:6, ratio:"16/9" },
+  ];
+  return (
+    <div className="mosaic reveal">
+      {explicit.map(({ p, col, ratio }) => <ProjectCard key={p.id} p={p} colSpan={col} aspect={ratio} />)}
+    </div>
+  );
+}
+
+function WorkList() {
+  return (
+    <div className="reveal">
+      {PROJECTS.map((p, i) =>
+        <a className="work-row" href="#" key={p.id}>
+          <div style={{ display:"flex", flexDirection:"column", gap:6 }}>
+            <span className="mono">{String(i+1).padStart(2,"0")} · {p.client}</span>
+            <span style={{ fontFamily:"var(--font-display)", fontSize:"clamp(18px,2.4vw,28px)", letterSpacing:"-0.025em", lineHeight:1.05, fontWeight:500 }}>{p.title}</span>
+          </div>
+          <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>{p.tags.slice(0,2).map(t => <span key={t} className="tag">{t}</span>)}</div>
+          <span className="mono" style={{ color:"var(--accent)" }}>{p.metric}</span>
+          <span className="mono">{p.year} ↗</span>
+          <div className="preview ph"><span className="ph-label">{p.client}</span></div>
+        </a>
+      )}
+    </div>
+  );
+}
+
+function WorkStacked() {
+  return (
+    <div className="mosaic stacked reveal" style={{ gap:28 }}>
+      {PROJECTS.map(p =>
+        <a className="m" key={p.id} href="#">
+          <div className="img" style={{ aspectRatio:"16/9" }}>
+            {p.img
+              ? <img src={p.img} alt={p.client} style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+              : <div className="ph" style={{ width:"100%", height:"100%", borderRadius:0, background: p.accent ? "linear-gradient(135deg,#146EF5 0%,#4d92ff 100%)" : "var(--bg-2)" }}>
+                  {!p.accent && <span className="ph-label">{p.client} · case study</span>}
+                  {p.accent && <div style={{ position:"absolute", inset:0, display:"flex", alignItems:"center", justifyContent:"center", color:"#fff", fontFamily:"var(--font-display)", fontWeight:500, fontSize:"clamp(32px,5vw,72px)" }}>{p.client}</div>}
+                </div>
+            }
+          </div>
+          <div className="meta">
+            <span className="mono">{p.client} · {p.year}</span>
+            <h3 style={{ fontSize:"clamp(20px,2.4vw,36px)" }}>{p.title}</h3>
+            <p style={{ margin:0, color:"var(--muted)", fontSize:15, maxWidth:460 }}>
+              {p.sub || `A ${p.tags[0].toLowerCase()} engagement focused on ${p.tags.slice(1).join(", ").toLowerCase()}. Outcome: ${p.metric}.`}
+            </p>
+            <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>{p.tags.map(t => <span key={t} className="tag">{t}</span>)}</div>
+            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", paddingTop:16, borderTop:"0.5px solid var(--line)", marginTop:8 }}>
+              <span className="mono" style={{ color:"var(--accent)", letterSpacing:"0.02em" }}>{p.metric}</span>
+              <span style={{ fontFamily:"var(--font-display)", fontSize:14 }}>View project ↗</span>
+            </div>
+          </div>
+        </a>
+      )}
+    </div>
+  );
+}
+
+function ContactRow({ label, value, href }) {
+  return (
+    <a href={href} style={{ display:"grid", gridTemplateColumns:"120px 1fr auto", gap:16, alignItems:"center", padding:"14px 0", borderTop:"0.5px solid var(--line)" }}>
+      <span className="mono">{label}</span>
+      <span style={{ fontFamily:"var(--font-display)", fontSize:"clamp(14px,1.6vw,19px)", letterSpacing:"-0.015em", color:"var(--fg)" }}>{value}</span>
+      <span className="mono" style={{ color:"var(--fg-2)" }}>↗</span>
+    </a>
+  );
+}
+
+function LocalTime() {
+  const [t, setT] = React.useState("");
+  React.useEffect(() => {
+    function update() {
+      const opts = { hour:"2-digit", minute:"2-digit", second:"2-digit", timeZone:"Asia/Kolkata", hour12:false };
+      setT(new Intl.DateTimeFormat("en-GB", opts).format(new Date()));
+    }
+    update();
+    const id = setInterval(update, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return <div style={{ fontFamily:"var(--font-mono)", fontSize:22, color:"var(--fg)", fontVariantNumeric:"tabular-nums", letterSpacing:"0.02em" }}>{t}</div>;
+}
+
+function ContactForm() {
+  const [state, setState] = React.useState({ name:"", email:"", scope:"Marketing Site", budget:"$10–25k", msg:"" });
+  const [sent, setSent] = React.useState(false);
+  const inputStyle = { width:"100%", padding:"12px 14px", border:"0.5px solid var(--line)", borderRadius:10, background:"var(--bg)", color:"var(--fg)", fontFamily:"var(--font-body)", fontSize:14.5, outline:"none", transition:"border-color .2s" };
+  const labelStyle = { fontFamily:"var(--font-mono)", fontSize:10.5, letterSpacing:"0.06em", textTransform:"uppercase", color:"var(--muted)", marginBottom:6, display:"block" };
+  function submit(e) { e.preventDefault(); setSent(true); setTimeout(() => setSent(false), 4000); }
+  return (
+    <form onSubmit={submit} style={{ display:"flex", flexDirection:"column", gap:14 }}>
+      <div className="form-row">
+        <label><span style={labelStyle}>Name</span><input style={inputStyle} value={state.name} onChange={e => setState({...state,name:e.target.value})} placeholder="Your name" /></label>
+        <label><span style={labelStyle}>Email</span><input style={inputStyle} type="email" value={state.email} onChange={e => setState({...state,email:e.target.value})} placeholder="you@company.com" /></label>
+      </div>
+      <label>
+        <span style={labelStyle}>Project type</span>
+        <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
+          {["Enterprise","Marketing Site","SaaS","Migration","Automation"].map(s =>
+            <button type="button" key={s} onClick={() => setState({...state,scope:s})} className="tag"
+              style={{ border:"0.5px solid "+(state.scope===s?"var(--fg)":"var(--line)"), color:state.scope===s?"var(--fg)":"var(--muted)", background:state.scope===s?"var(--soft)":"transparent" }}>
+              {s}
+            </button>
+          )}
+        </div>
+      </label>
+      <label>
+        <span style={labelStyle}>Budget</span>
+        <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
+          {["< $10k","$10–25k","$25–60k","$60k+"].map(s =>
+            <button type="button" key={s} onClick={() => setState({...state,budget:s})} className="tag"
+              style={{ border:"0.5px solid "+(state.budget===s?"var(--fg)":"var(--line)"), color:state.budget===s?"var(--fg)":"var(--muted)", background:state.budget===s?"var(--soft)":"transparent" }}>
+              {s}
+            </button>
+          )}
+        </div>
+      </label>
+      <label>
+        <span style={labelStyle}>Project</span>
+        <textarea style={{ ...inputStyle, minHeight:90, resize:"vertical" }} value={state.msg} onChange={e => setState({...state,msg:e.target.value})} placeholder="A line or two about what you're building." />
+      </label>
+      <button type="submit" className="btn btn-primary" style={{ marginTop:4, justifyContent:"space-between" }}>
+        {sent ? "Sent — talk soon ✓" : "Send brief"}
+        <span className="arrow">↗</span>
+      </button>
+    </form>
+  );
+}
+
+function Contact() {
+  const [year, setYear] = React.useState(2026);
+  React.useEffect(() => { setYear(new Date().getFullYear()); }, []);
+  return (
+    <section id="contact" className="section" style={{ borderTop:"0.5px solid var(--line)", paddingBottom:60 }}>
+      <div className="wrap">
+        <div className="reveal" style={{ display:"flex", justifyContent:"space-between", alignItems:"baseline", marginBottom:56, gap:24, flexWrap:"wrap" }}>
+          <div className="mono" style={{ display:"flex", flexDirection:"column", gap:6 }}>
+            <span>/ 04</span>
+            <span style={{ color:"var(--fg-2)" }}>Contact</span>
+          </div>
+          <span className="pill"><span className="dot"/>Currently accepting Q3 · 2026 projects</span>
+        </div>
+
+        <h2 className="contact-h reveal">
+          Let's build<br />
+          something <span className="acc">exceptional</span>.
+        </h2>
+
+        <div className="contact-inner reveal" style={{ marginTop:"clamp(36px, 6vw, 80px)" }}>
+          <div>
+            <p style={{ fontSize:18, color:"var(--muted)", maxWidth:540, margin:0 }}>
+              Whether you're scaling a marketing site, replatforming a CMS, or wiring an automation stack — tell me the shape of the problem. Most replies inside 24 hours.
+            </p>
+            <div style={{ marginTop:36, display:"flex", flexDirection:"column", gap:18, maxWidth:540 }}>
+              <ContactRow label="Email" value="contact@sagr.work" href="mailto:contact@sagr.work" />
+              <ContactRow label="Schedule" value="cal.com/sagarpanchal" href="#" />
+              <ContactRow label="LinkedIn" value="/in/sagarpanchal" href="#" />
+            </div>
+          </div>
+          <div style={{ background:"var(--card)", border:"0.5px solid var(--line)", borderRadius:"var(--radius-lg)", padding:32 }}>
+            <div className="mono" style={{ marginBottom:16 }}>Quick brief</div>
+            <ContactForm />
+          </div>
+        </div>
+
+        {/* Wordmark */}
+        <div className="reveal" style={{ overflow:"hidden", borderTop:"0.5px solid var(--line)", marginTop:"clamp(60px, 10vw, 120px)", padding:"clamp(24px, 4vw, 40px) 0" }}>
+          <div className="wordmark" style={{ letterSpacing:"-0.06em", whiteSpace:"nowrap", textAlign:"center" }}>
+            Sagar&nbsp;Panchal<span style={{ color:"var(--accent)" }}>.</span>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="footer-grid" style={{ borderWidth:"0px" }}>
+          <div className="foot-col">
+            <h6>Sagar Panchal</h6>
+            <p style={{ margin:0, color:"var(--muted)", fontSize:13.5, maxWidth:320 }}>Webflow developer &amp; designer, building enterprise-grade marketing sites and product experiences.</p>
+          </div>
+          <div className="foot-col">
+            <h6>Sitemap</h6>
+            <a href="#hero">Index</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#work">Selected work</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <div className="foot-col">
+            <h6>Connect</h6>
+            <a href="mailto:contact@sagr.work">Email ↗</a>
+            <a href="#">LinkedIn ↗</a>
+            <a href="#">Schedule a call ↗</a>
+          </div>
+        </div>
+        <div className="foot-bar" style={{ color:"var(--muted)", fontSize:12, fontFamily:"var(--font-mono)", letterSpacing:"0.04em" }}>
+          <span>© {year} Sagar Panchal — All rights reserved.</span>
+          <span style={{ opacity:0.7 }}>v2026.07 · Built in Webflow</span>
+          <button type="button" className="totop" onClick={() => window.scrollTo({ top:0, behavior:"smooth" })}>
+            Back to top <span className="tt-ic">↑</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+Object.assign(window, { About, Services, Work, Contact, useReveal });
+</script>
+
+<!-- ═══════════════ APP SHELL ═══════════════ -->
+<script type="text/babel">
+const { useEffect: ue, useRef: ur, useState: us } = React;
+
+function CustomCursor({ enabled }) {
+  const dotRef = ur(null), ringRef = ur(null);
+  ue(() => {
+    if (!enabled) return;
+    const dot = dotRef.current, ring = ringRef.current;
+    let mx = -100, my = -100, dx = -100, dy = -100, rx = -100, ry = -100, raf;
+    function tick() {
+      dx += (mx-dx)*0.6; dy += (my-dy)*0.6;
+      rx += (mx-rx)*0.18; ry += (my-ry)*0.18;
+      if (dot) dot.style.transform = `translate(${dx}px,${dy}px) translate(-50%,-50%)`;
+      if (ring) ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+      raf = requestAnimationFrame(tick);
+    }
+    function onMove(e) { mx = e.clientX; my = e.clientY; }
+    function onOver(e) {
+      const interactive = e.target.closest('a,button,[data-magnetic],input,textarea,label,.tool,.m,.work-row,.b,.svc-row,.tag');
+      interactive ? ring?.classList.add("is-hover") : ring?.classList.remove("is-hover");
+    }
+    function onDown() { if (ring) ring.style.opacity = "0.6"; }
+    function onUp() { if (ring) ring.style.opacity = "1"; }
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseover", onOver);
+    window.addEventListener("mousedown", onDown);
+    window.addEventListener("mouseup", onUp);
+    raf = requestAnimationFrame(tick);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("mousemove",onMove); window.removeEventListener("mouseover",onOver); window.removeEventListener("mousedown",onDown); window.removeEventListener("mouseup",onUp); };
+  }, [enabled]);
+  if (!enabled) return null;
+  return <><div ref={ringRef} className="cursor-ring"/><div ref={dotRef} className="cursor-dot"/></>;
+}
+
+function Nav() {
+  const [scrolled, setScrolled] = us(false);
+  const [mobileOpen, setMobileOpen] = us(false);
+  ue(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  const links = [
+    { href:"#about", label:"About" },
+    { href:"#services", label:"Services" },
+    { href:"#work", label:"Work" },
+    { href:"#contact", label:"Contact" },
+  ];
+  const close = () => setMobileOpen(false);
+  return (
+    <>
+      <nav className="nav" style={{ top: scrolled ? 12 : 18, transition:"top .3s ease" }}>
+        <div className="nav-inner">
+          <a href="#hero" className="nav-brand">
+            <span className="glyph"/>&nbsp;Sagar Panchal
+          </a>
+          <div className="nav-links">
+            {links.map(l => <a key={l.href} href={l.href} className="nav-link">{l.label}</a>)}
+          </div>
+          <a href="#contact" className="nav-cta" data-magnetic>
+            <span className="ndot"/>Start a project
+          </a>
+          <button className="nav-hamburger" onClick={() => setMobileOpen(o => !o)} aria-label="Toggle menu">
+            <span className={mobileOpen ? "ham-bar" : "ham-bar"} style={mobileOpen ? { transform:"translateY(5.5px) rotate(45deg)" } : {}} />
+            <span className="ham-bar" style={mobileOpen ? { opacity:0, transform:"scaleX(0)" } : {}} />
+            <span className="ham-bar" style={mobileOpen ? { transform:"translateY(-5.5px) rotate(-45deg)" } : {}} />
+          </button>
+        </div>
+      </nav>
+      {mobileOpen && (
+        <div className="mobile-nav">
+          {links.map(l => <a key={l.href} href={l.href} className="mobile-nav-link" onClick={close}>{l.label}</a>)}
+          <div className="mobile-nav-hair" />
+          <div className="mobile-nav-cta">
+            <a href="#contact" className="btn btn-primary" onClick={close}>Start a project <span>↗</span></a>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  ue(() => { document.documentElement.setAttribute("data-theme", t.theme || "light"); }, [t.theme]);
+  ue(() => { document.documentElement.setAttribute("data-type", t.typePair || "grotesque"); }, [t.typePair]);
+  ue(() => { document.body.setAttribute("data-cursor", t.cursor ? "on" : "off"); }, [t.cursor]);
+  useReveal();
+  return (
+    <>
+      <CustomCursor enabled={!!t.cursor} />
+      <Nav />
+      <main>
+        <Hero motif={t.heroMotif || "grid"} />
+        <About />
+        <Services />
+        <Work layout={t.workLayout || "stacked"} />
+        <Contact />
+      </main>
+      <TweaksPanel title="Tweaks">
+        <TweakSection label="Theme" />
+        <TweakRadio label="Theme" value={t.theme} options={[{value:"light",label:"Light"},{value:"warm",label:"Warm"},{value:"dark",label:"Dark"}]} onChange={v => setTweak("theme",v)} />
+        <TweakSelect label="Typography" value={t.typePair} options={[{value:"grotesque",label:"Space Grotesk · default"},{value:"tight",label:"Inter Tight · sharp"},{value:"manrope",label:"Manrope · soft grotesque"}]} onChange={v => setTweak("typePair",v)} />
+        <TweakSection label="Hero" />
+        <TweakSelect label="Motif" value={t.heroMotif} options={[{value:"grid",label:"Cursor-reactive dot grid"},{value:"bento",label:"Floating capability bento"},{value:"marquee",label:"Massive type marquee"},{value:"object",label:"Abstract gradient object"}]} onChange={v => setTweak("heroMotif",v)} />
+        <TweakSection label="Work" />
+        <TweakRadio label="Layout" value={t.workLayout} options={[{value:"mosaic",label:"Mosaic"},{value:"list",label:"List"},{value:"stacked",label:"Stack"}]} onChange={v => setTweak("workLayout",v)} />
+        <TweakSection label="Interaction" />
+        <TweakToggle label="Custom cursor" value={t.cursor} onChange={v => setTweak("cursor",v)} />
+      </TweaksPanel>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
