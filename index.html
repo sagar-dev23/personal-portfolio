@@ -1605,8 +1605,8 @@ function Nav() {
           <div className="nav-links">
             {links.map(l => <a key={l.href} href={l.href} className="nav-link">{l.label}</a>)}
           </div>
-          <a href="#contact" className="nav-cta" data-magnetic>
-            <span className="ndot"/>Start a project
+          <a href="https://cal.com/sagr-work/15min" target="_blank" rel="noopener noreferrer" className="nav-cta" data-magnetic>
+            <span className="ndot"/>Schedule a call
           </a>
           <button className="nav-hamburger" onClick={() => setMobileOpen(o => !o)} aria-label="Toggle menu">
             <span className={mobileOpen ? "ham-bar" : "ham-bar"} style={mobileOpen ? { transform:"translateY(5.5px) rotate(45deg)" } : {}} />
