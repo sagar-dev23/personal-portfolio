@@ -1062,8 +1062,8 @@ function About() {
         <div className="bento reveal">
           {/* Portrait + bio */}
           <div className="b" style={{ gridColumn:"span 5", gridRow:"span 2", padding:0, overflow:"hidden", display:"flex", flexDirection:"column" }}>
-            <div className="ph" style={{ flex:1, minHeight:280, borderRadius:0, backgroundColor:"rgb(255,252,241)" }}>
-              <span className="ph-label">portrait · 4:5</span>
+            <div style={{ flex:1, minHeight:280, borderRadius:0, overflow:"hidden", position:"relative" }}>
+              <img src="portrait.png" alt="Sagar Panchal" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block", position:"absolute", inset:0 }} />
             </div>
             <div style={{ padding:24, display:"flex", flexDirection:"column", gap:14 }}>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"baseline" }}>
@@ -1191,10 +1191,10 @@ function Services() {
 }
 
 const PROJECTS = [
-  { id:"phi", client:"Phi Designs", title:"Premium office interiors — marketing site.", sub:"A marketing engagement focused on Webflow CMS migration and portfolio architecture across 13 collections.", tags:["Webflow","CMS","Integrations & Automations"], year:"2025", metric:"90+ PageSpeed · 150+ pages", size:"lg", img:"Phi _ Browser_ centered.png" },
-  { id:"devx", client:"DevX", title:"Managed office spaces — marketing website.", sub:"Landing page optimisation and GTM setup for call-button conversion tracking across campaigns.", tags:["Webflow","CMS","Integrations & Automations"], year:"2025", metric:"250+ blogs · 200+ pages", size:"md", img:"DevX _ Browser_ centered.png" },
-  { id:"northwind", client:"Momentum91", title:"Digital product agency — marketing site.", sub:"Webflow site build, CMS structure and brand presence for the agency — plus client projects delivered across Webflow, automation and growth.", tags:["Webflow","Custom Code","Integrations & Automations"], year:"2026", metric:"90+ PageSpeed · 5+ client projects", accent:false, size:"lg", img:"momentum91.png" },
-  { id:"allevents", client:"AllEvents", title:"Ad landing page for global events platform.", sub:"A conversion-focused landing page built on Webflow for paid ad campaigns, optimised for speed and lead capture.", tags:["Webflow","Landing Page","Ads"], year:"2025", metric:"90+ PageSpeed", accent:false, size:"md", img:"AllEvents _ Browser_ centered.png" },
+  { id:"phi", client:"Phi Designs", title:"Premium office interiors — marketing site.", sub:"A marketing engagement focused on Webflow CMS migration and portfolio architecture across 13 collections.", tags:["Webflow","CMS","Integrations & Automations"], year:"2025", metric:"90+ PageSpeed · 150+ pages", size:"lg", img:"Phi _ Browser_ centered.png", url:"https://www.phidesigns.in/" },
+  { id:"devx", client:"DevX", title:"Managed office spaces — marketing website.", sub:"Landing page optimisation and GTM setup for call-button conversion tracking across campaigns.", tags:["Webflow","CMS","Integrations & Automations"], year:"2025", metric:"250+ blogs · 200+ pages", size:"md", img:"DevX _ Browser_ centered.png", url:"https://www.devx.work" },
+  { id:"northwind", client:"Momentum91", title:"Digital product agency — marketing site.", sub:"Webflow site build, CMS structure and brand presence for the agency — plus client projects delivered across Webflow, automation and growth.", tags:["Webflow","Custom Code","Integrations & Automations"], year:"2026", metric:"90+ PageSpeed · 5+ client projects", accent:false, size:"lg", img:"momentum91.png", url:"https://www.momentum91.com" },
+  { id:"allevents", client:"AllEvents", title:"Ad landing page for global events platform.", sub:"A conversion-focused landing page built on Webflow for paid ad campaigns, optimised for speed and lead capture.", tags:["Webflow","Landing Page","Ads"], year:"2025", metric:"90+ PageSpeed", accent:false, size:"md", img:"AllEvents _ Browser_ centered.png", url:"https://allevents-landing-page.webflow.io/" },
 ];
 
 function Work({ layout }) {
@@ -1236,7 +1236,7 @@ function Work({ layout }) {
 
 function ProjectCard({ p, colSpan = 6, aspect = "16/10" }) {
   return (
-    <a className="m" href="#" style={{ gridColumn:`span ${colSpan}` }}>
+    <a className="m" href={p.url || "#"} target={p.url?"_blank":undefined} rel={p.url?"noopener noreferrer":undefined} style={{ gridColumn:`span ${colSpan}` }}>
       <div className="img" style={{ aspectRatio:aspect }}>
         {p.img
           ? <img src={p.img} alt={p.client} style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
@@ -1286,7 +1286,7 @@ function WorkList() {
   return (
     <div className="reveal">
       {PROJECTS.map((p, i) =>
-        <a className="work-row" href="#" key={p.id}>
+        <a className="work-row" href={p.url || "#"} target={p.url?"_blank":undefined} rel={p.url?"noopener noreferrer":undefined} key={p.id}>
           <div style={{ display:"flex", flexDirection:"column", gap:6 }}>
             <span className="mono">{String(i+1).padStart(2,"0")} · {p.client}</span>
             <span style={{ fontFamily:"var(--font-display)", fontSize:"clamp(18px,2.4vw,28px)", letterSpacing:"-0.025em", lineHeight:1.05, fontWeight:500 }}>{p.title}</span>
@@ -1305,7 +1305,7 @@ function WorkStacked() {
   return (
     <div className="mosaic stacked reveal" style={{ gap:28 }}>
       {PROJECTS.map(p =>
-        <a className="m" key={p.id} href="#">
+        <a className="m" key={p.id} href={p.url || "#"} target={p.url?"_blank":undefined} rel={p.url?"noopener noreferrer":undefined}>
           <div className="img" style={{ aspectRatio:"16/9" }}>
             {p.img
               ? <img src={p.img} alt={p.client} style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
@@ -1324,7 +1324,7 @@ function WorkStacked() {
             <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>{p.tags.map(t => <span key={t} className="tag">{t}</span>)}</div>
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", paddingTop:16, borderTop:"0.5px solid var(--line)", marginTop:8 }}>
               <span className="mono" style={{ color:"var(--accent)", letterSpacing:"0.02em" }}>{p.metric}</span>
-              <span style={{ fontFamily:"var(--font-display)", fontSize:14 }}>View project ↗</span>
+              <span style={{ fontFamily:"var(--font-display)", fontSize:14, color:"var(--accent)" }}>View project ↗</span>
             </div>
           </div>
         </a>
@@ -1450,7 +1450,7 @@ function Contact() {
             <span>/ 04</span>
             <span style={{ color:"var(--fg-2)" }}>Contact</span>
           </div>
-          <span className="pill"><span className="dot"/>Currently accepting Q3 · 2026 projects</span>
+          <span className="pill"><span className="dot"/>Open for work</span>
         </div>
 
         <h2 className="contact-h reveal">
@@ -1486,26 +1486,24 @@ function Contact() {
         <div className="footer-grid" style={{ borderWidth:"0px" }}>
           <div className="foot-col">
             <h6>Sagar Panchal</h6>
-            <p style={{ margin:0, color:"var(--muted)", fontSize:13.5, maxWidth:320 }}>Webflow developer &amp; designer, building enterprise-grade marketing sites and product experiences.</p>
+            <p style={{ margin:0, color:"var(--muted)", fontSize:13.5, maxWidth:320 }}>Webflow developer &amp; designer building enterprise-grade marketing sites, CMS systems, and automations.</p>
           </div>
           <div className="foot-col">
             <h6>Sitemap</h6>
-            <a href="#hero">Index</a>
             <a href="#about">About</a>
             <a href="#services">Services</a>
-            <a href="#work">Selected work</a>
+            <a href="#work">Work</a>
             <a href="#contact">Contact</a>
           </div>
           <div className="foot-col">
             <h6>Connect</h6>
             <a href="mailto:contact@sagr.work">Email ↗</a>
-            <a href="#">LinkedIn ↗</a>
-            <a href="#">Schedule a call ↗</a>
+            <a href="https://www.linkedin.com/in/sagarpanchal" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            <a href="https://cal.com/sagr-work/15min" target="_blank" rel="noopener noreferrer">Schedule a call ↗</a>
           </div>
         </div>
         <div className="foot-bar" style={{ color:"var(--muted)", fontSize:12, fontFamily:"var(--font-mono)", letterSpacing:"0.04em" }}>
           <span>© {year} Sagar Panchal — All rights reserved.</span>
-          <span style={{ opacity:0.7 }}>v2026.07 · Built in Webflow</span>
           <button type="button" className="totop" onClick={() => window.scrollTo({ top:0, behavior:"smooth" })}>
             Back to top <span className="tt-ic">↑</span>
           </button>
