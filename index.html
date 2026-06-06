@@ -9,18 +9,21 @@
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
+<!-- Canonical -->
+<link rel="canonical" href="https://sagar-dev23.github.io/personal-portfolio/" />
+
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://sagar-dev23.github.io/personal-portfolio/" />
 <meta property="og:title" content="Sagar Panchal - Webflow Developer &amp; Designer" />
 <meta property="og:description" content="Enterprise-grade Webflow sites, Landing pages, and Integrations &amp; automations." />
-<meta property="og:image" content="portrait.png" />
+<meta property="og:image" content="https://sagar-dev23.github.io/personal-portfolio/portrait.png" />
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Sagar Panchal - Webflow Developer &amp; Designer" />
 <meta name="twitter:description" content="Enterprise-grade Webflow sites, Landing pages, and Integrations &amp; automations." />
-<meta name="twitter:image" content="portrait.png" />
+<meta name="twitter:image" content="https://sagar-dev23.github.io/personal-portfolio/portrait.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -895,7 +898,7 @@ function DefaultHero({ headline }) {
       </h1>
       <div className="hero-foot">
         <p style={{ margin: 0, fontSize: 18, lineHeight: 1.55, color: "var(--muted)", maxWidth: 520 }}>
-          I'm <span style={{ fontWeight: 500, color: "var(--accent)" }}>Sagar Panchal</span>, a Webflow developer &amp; designer building refined, conversion-focused marketing sites and product experiences for enterprises and high-growth startups.
+          I'm <span style={{ fontWeight: 500, color: "var(--accent)" }}>Sagar Panchal</span>, a Webflow developer &amp; designer building enterprise-grade marketing sites, CMS systems, and automations for high-growth startups and established brands.
         </p>
         <div style={{ display: "flex", gap: 12, justifyContent: "flex-end", flexWrap: "wrap" }}>
           <MagneticButton href="#contact" className="btn btn-primary">Start a project <span className="arrow">↗</span></MagneticButton>
@@ -941,7 +944,7 @@ function BentoHero({ headline }) {
       <FloatTag style={{ right: "8%", top: "8%", animationDelay: "-1s" }}>Webflow Expert</FloatTag>
       <FloatTag style={{ right: "20%", top: "44%", animationDelay: "-3s" }}>Make · n8n · Zapier</FloatTag>
       <FloatTag style={{ right: "4%", top: "70%", animationDelay: "-5s" }}>Performance · 98 PSI</FloatTag>
-      <FloatTag style={{ right: "30%", top: "20%", animationDelay: "-2s" }}>Zapier · Make · n8n</FloatTag>
+      <FloatTag style={{ right: "30%", top: "20%", animationDelay: "-2s" }}>AI Automations</FloatTag>
     </div>
   );
 }
@@ -1620,7 +1623,7 @@ function Nav() {
           {links.map(l => <a key={l.href} href={l.href} className="mobile-nav-link" onClick={close}>{l.label}</a>)}
           <div className="mobile-nav-hair" />
           <div className="mobile-nav-cta">
-            <a href="#contact" className="btn btn-primary" onClick={close}>Start a project <span>↗</span></a>
+            <a href="https://cal.com/sagr-work/15min" target="_blank" rel="noopener noreferrer" className="btn btn-primary" onClick={close}>Schedule a call <span>↗</span></a>
           </div>
         </div>
       )}
@@ -1629,33 +1632,20 @@ function Nav() {
 }
 
 function App() {
-  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-  ue(() => { document.documentElement.setAttribute("data-theme", t.theme || "light"); }, [t.theme]);
-  ue(() => { document.documentElement.setAttribute("data-type", t.typePair || "grotesque"); }, [t.typePair]);
-  ue(() => { document.body.setAttribute("data-cursor", t.cursor ? "on" : "off"); }, [t.cursor]);
+  ue(() => { document.documentElement.setAttribute("data-theme", "light"); }, []);
+  ue(() => { document.documentElement.setAttribute("data-type", "grotesque"); }, []);
+  ue(() => { document.body.setAttribute("data-cursor", "off"); }, []);
   useReveal();
   return (
     <>
-      <CustomCursor enabled={!!t.cursor} />
       <Nav />
       <main>
-        <Hero motif={t.heroMotif || "grid"} />
+        <Hero motif="grid" />
         <About />
         <Services />
-        <Work layout={t.workLayout || "stacked"} />
+        <Work layout="stacked" />
         <Contact />
       </main>
-      <TweaksPanel title="Tweaks">
-        <TweakSection label="Theme" />
-        <TweakRadio label="Theme" value={t.theme} options={[{value:"light",label:"Light"},{value:"warm",label:"Warm"},{value:"dark",label:"Dark"}]} onChange={v => setTweak("theme",v)} />
-        <TweakSelect label="Typography" value={t.typePair} options={[{value:"grotesque",label:"Space Grotesk · default"},{value:"tight",label:"Inter Tight · sharp"},{value:"manrope",label:"Manrope · soft grotesque"}]} onChange={v => setTweak("typePair",v)} />
-        <TweakSection label="Hero" />
-        <TweakSelect label="Motif" value={t.heroMotif} options={[{value:"grid",label:"Cursor-reactive dot grid"},{value:"bento",label:"Floating capability bento"},{value:"marquee",label:"Massive type marquee"},{value:"object",label:"Abstract gradient object"}]} onChange={v => setTweak("heroMotif",v)} />
-        <TweakSection label="Work" />
-        <TweakRadio label="Layout" value={t.workLayout} options={[{value:"mosaic",label:"Mosaic"},{value:"list",label:"List"},{value:"stacked",label:"Stack"}]} onChange={v => setTweak("workLayout",v)} />
-        <TweakSection label="Interaction" />
-        <TweakToggle label="Custom cursor" value={t.cursor} onChange={v => setTweak("cursor",v)} />
-      </TweaksPanel>
     </>
   );
 }
