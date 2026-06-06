@@ -1211,25 +1211,28 @@ function Work({ layout }) {
         {layout === "list" && <WorkList />}
         {layout === "mosaic" && <WorkMosaic />}
         {layout === "stacked" && <WorkStacked />}
-        {/* Client logos strip */}
-        <div className="reveal" style={{ marginTop:72, borderTop:"0.5px solid var(--line)", borderBottom:"0.5px solid var(--line)", padding:"48px 0" }}>
-          <span className="mono" style={{ display:"block", marginBottom:40, textAlign:"center" }}>Clients &amp; brands I've worked with</span>
-          <div className="client-logos-grid" style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:"32px 40px", alignItems:"center", maxWidth:860, margin:"0 auto" }}>
-            {[
-              { name:"Tixa",              img:"tixa.svg" },
-              { name:"AltiusHub",         img:"altiushub.svg" },
-              { name:"BestBid",           img:"bestbid.svg" },
-              { name:"Devyami",           img:"devyami.webp" },
-              { name:"Knockout FC",       img:"knockout-fightclub.png" },
-              { name:"Ironman Lifestyle", img:"ironman lifestyle.png" },
-            ].map(c =>
-              <div key={c.name} style={{ display:"flex", alignItems:"center", justifyContent:"center", padding:"20px 24px", borderRadius:12, border:"0.5px solid var(--line)", background:"var(--card)", transition:"border-color .25s" }}
-                onMouseEnter={e => e.currentTarget.style.borderColor="var(--fg-2)"}
-                onMouseLeave={e => e.currentTarget.style.borderColor="var(--line)"}
-              >
-                <img src={c.img} alt={c.name} style={{ maxWidth:"100%", width:"auto", height:36, objectFit:"contain", display:"block", filter:"var(--logo-filter, none)" }} />
-              </div>
-            )}
+        {/* Client logos marquee */}
+        <div className="reveal" style={{ marginTop:72, borderTop:"0.5px solid var(--line)", borderBottom:"0.5px solid var(--line)", padding:"40px 0", overflow:"hidden" }}>
+          <span className="mono" style={{ display:"block", marginBottom:32, textAlign:"center" }}>Clients &amp; brands I've worked with</span>
+          <div style={{ overflow:"hidden", maskImage:"linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)", WebkitMaskImage:"linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)" }}>
+            <div style={{ display:"flex", gap:0, animation:"marquee 28s linear infinite", width:"max-content" }}>
+              {[...Array(2)].map((_, ri) =>
+                <div key={ri} style={{ display:"flex", alignItems:"center", gap:0 }}>
+                  {[
+                    { name:"Tixa",              img:"tixa.svg" },
+                    { name:"AltiusHub",         img:"altiushub.svg" },
+                    { name:"BestBid",           img:"bestbid.svg" },
+                    { name:"Devyami",           img:"devyami.webp" },
+                    { name:"Knockout FC",       img:"knockout-fightclub-copy.png" },
+                    { name:"Ironman Lifestyle", img:"ironman lifestyle.png" },
+                  ].map((c, i) =>
+                    <div key={i} style={{ display:"flex", alignItems:"center", justifyContent:"center", padding:"0 56px", height:64, borderRight:"0.5px solid var(--line)" }}>
+                      <img src={c.img} alt={c.name} style={{ width:"auto", height:32, objectFit:"contain", display:"block", filter:"var(--logo-filter, none)" }} />
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
