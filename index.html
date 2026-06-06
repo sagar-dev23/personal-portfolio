@@ -324,7 +324,7 @@
   .svc-row:hover { padding-left: 24px; }
   .svc-num { font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding-top: 6px; }
   .svc-title { font-family: var(--font-display); font-weight: 500; font-size: 28px; letter-spacing: -0.025em; line-height: 1.05; }
-  .svc-desc { color: var(--muted); font-size: 15px; line-height: 1.6; max-width: 520px; }
+  .svc-desc { color: var(--muted); font-size: 15px; line-height: 1.6; max-width: 520px; margin: 0; }
   .svc-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
   @media (max-width: 880px) { .svc-row { grid-template-columns: 1fr; gap: 14px; } }
   @media (max-width: 640px) { .svc-title { font-size: 22px !important; } .svc-row { padding: 24px 0; } }
@@ -1025,7 +1025,7 @@ function SkillBar({ label, pct }) {
 
 const TOOL_LOGOS = {
   Webflow:   "webflow logo.svg",
-  Framer:    "framer.png",
+  GitHub:    "github_PNG25.png",
   ClickUp:   "ClickUp_Logo.png",
   Notion:    "Notion_logo.png",
   Clarity:   "MICROSOFT-CLARITY-LOGO.webp",
@@ -1099,9 +1099,9 @@ function About() {
           <div className="b" style={{ gridColumn:"span 4" }}>
             <span className="mono" style={{ marginBottom:16 }}>Where I'm strongest</span>
             <div>
-              <SkillBar label="Webflow Development" pct={98} />
-              <SkillBar label="CMS Architecture" pct={95} />
-              <SkillBar label="Performance & SEO" pct={92} />
+              <SkillBar label="Webflow Development" pct={95} />
+              <SkillBar label="Integrations & Automations" pct={90} />
+              <SkillBar label="Performance & SEO" pct={85} />
             </div>
           </div>
 
@@ -1141,13 +1141,12 @@ function About() {
 
         {/* Tool wall */}
         <div className="reveal" style={{ marginTop:64 }}>
-          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"baseline", marginBottom:20 }}>
+          <div style={{ marginBottom:20 }}>
             <span className="mono">Stack · tools &amp; platforms</span>
-            <span className="mono">12 / 12</span>
           </div>
           <div className="tools">
             {[
-              "Webflow", "Framer", "ClickUp", "Notion",
+              "Webflow", "GitHub", "ClickUp", "Notion",
               "Clarity", "HubSpot", "Zapier", "Make.com",
               "n8n", "GA4", "GTM", "Figma",
             ].map(name =>
@@ -1166,7 +1165,7 @@ function Services() {
   const items = [
     { n:"01", t:"Enterprise Webflow Development", d:"Multi-region marketing sites and complex CMS architectures, engineered for scale. Style systems, component libraries, and editorial workflows your team can actually operate.", tags:["Webflow","CMS","Multi-region","Localization","Style Systems"] },
     { n:"02", t:"Marketing Sites & Landing Pages", d:"Conversion-focused marketing sites for SaaS and product launches. Custom interactions, performance-tuned, A/B test-ready and tightly integrated with your stack.", tags:["SaaS","Conversion","A/B Testing","Webflow"] },
-    { n:"03", t:"Custom Code & Integrations", d:"Bespoke JavaScript modules, custom CMS extensions, GSAP/Lenis interaction work, and tight integrations with Memberstack, Xano, Airtable, HubSpot and your data layer.", tags:["JavaScript","Memberstack","Xano","Airtable","HubSpot"] },
+    { n:"03", t:"Custom Code & Integrations", d:"Bespoke JavaScript modules, custom code, GSAP animations, marketing attribution, and clean API integrations that connect your site to the tools your team actually runs on.", tags:["JavaScript","Finsweet Attributes","Cookies Consent","Webhooks","API"] },
     { n:"04", t:"Automation & Workflow Systems", d:"Zapier, Make.com and n8n workflows that connect your CMS to CRM, billing, ops and analytics. Lead routing, content sync, form intelligence — wired end-to-end.", tags:["Zapier","Make.com","n8n","GA4","GTM"] },
   ];
   return (
@@ -1202,11 +1201,31 @@ function Work({ layout }) {
   return (
     <section id="work" className="section" style={{ borderTop:"0.5px solid var(--line)" }}>
       <div className="wrap">
-        <SectionHead index="/ 03" label="Selected work" title={<>Recent engagements,<br />shipped &amp; in flight<span style={{ color:"var(--accent)" }}>.</span></>} sub="A selection from the past three years — enterprise CMS, marketing sites, customer portals and migrations. NDA work available on request." />
+        <SectionHead index="/ 03" label="Selected work" title={<>Things I've built<br />lately<span style={{ color:"var(--accent)" }}>.</span></>} sub="A cross-section of the past three years across enterprise CMS, marketing sites, landing pages, and platform migrations." />
         {layout === "list" && <WorkList />}
         {layout === "mosaic" && <WorkMosaic />}
         {layout === "stacked" && <WorkStacked />}
-        <div className="reveal" style={{ marginTop:56, display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:16 }}>
+        {/* Client logos strip */}
+        <div className="reveal" style={{ marginTop:72, borderTop:"0.5px solid var(--line)", borderBottom:"0.5px solid var(--line)", padding:"40px 0" }}>
+          <span className="mono" style={{ display:"block", marginBottom:32, textAlign:"center" }}>Clients &amp; brands I've worked with</span>
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", flexWrap:"wrap", gap:"32px 48px" }}>
+            {[
+              { name:"Phi Designs",   img:"Phi _ Browser_ centered.png", placeholder:true },
+              { name:"DevX",          img:"DevX _ Browser_ centered.png", placeholder:true },
+              { name:"Momentum91",    img:"momentum91.png",               placeholder:true },
+              { name:"AllEvents",     img:"AllEvents _ Browser_ centered.png", placeholder:true },
+              { name:"Client 5",      placeholder:true },
+              { name:"Client 6",      placeholder:true },
+            ].map((c, i) =>
+              <div key={i} style={{ display:"flex", alignItems:"center", justifyContent:"center", width:140, height:48, border:"0.5px dashed var(--line)", borderRadius:8, background:"var(--soft)" }}>
+                <span className="mono" style={{ fontSize:10, color:"var(--faint)", textAlign:"center" }}>{c.name}</span>
+              </div>
+            )}
+          </div>
+          <p className="mono" style={{ textAlign:"center", marginTop:20, color:"var(--faint)", fontSize:10 }}>Drop client logos here — share files and I'll plug them in ↑</p>
+        </div>
+
+        <div className="reveal" style={{ marginTop:40, display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:16 }}>
           <span className="mono">Working with: Solo founders → Series C → Enterprise</span>
           <MagneticButton href="#contact" className="btn btn-secondary">Discuss your project <span className="arrow">↗</span></MagneticButton>
         </div>
@@ -1339,45 +1358,81 @@ function LocalTime() {
 }
 
 function ContactForm() {
-  const [state, setState] = React.useState({ name:"", email:"", scope:"Marketing Site", budget:"$10–25k", msg:"" });
-  const [sent, setSent] = React.useState(false);
-  const inputStyle = { width:"100%", padding:"12px 14px", border:"0.5px solid var(--line)", borderRadius:10, background:"var(--bg)", color:"var(--fg)", fontFamily:"var(--font-body)", fontSize:14.5, outline:"none", transition:"border-color .2s" };
+  const [state, setState] = React.useState({ name:"", email:"", company:"", website:"", msg:"" });
+  const [status, setStatus] = React.useState("idle"); // idle | sending | sent | error
+  const inputStyle = { width:"100%", padding:"12px 14px", border:"0.5px solid var(--line)", borderRadius:10, background:"var(--bg)", color:"var(--fg)", fontFamily:"var(--font-body)", fontSize:14.5, outline:"none", transition:"border-color .2s", boxSizing:"border-box" };
   const labelStyle = { fontFamily:"var(--font-mono)", fontSize:10.5, letterSpacing:"0.06em", textTransform:"uppercase", color:"var(--muted)", marginBottom:6, display:"block" };
-  function submit(e) { e.preventDefault(); setSent(true); setTimeout(() => setSent(false), 4000); }
+
+  async function submit(e) {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      await fetch("https://hook.eu2.make.com/xdb55btjo8b5eba5x2tad2j91m3rdnry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name:    state.name,
+          email:   state.email,
+          company: state.company,
+          website: state.website,
+          message: state.msg,
+          submitted_at: new Date().toISOString(),
+        }),
+      });
+      setStatus("sent");
+    } catch (_) {
+      setStatus("error");
+    }
+  }
+
+  if (status === "sent") {
+    return (
+      <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:16, padding:"40px 24px", textAlign:"center" }}>
+        <div style={{ width:48, height:48, borderRadius:"50%", background:"var(--accent)", display:"grid", placeItems:"center" }}>
+          <span style={{ color:"#fff", fontSize:22 }}>✓</span>
+        </div>
+        <h4 style={{ margin:0, fontFamily:"var(--font-display)", fontSize:20, fontWeight:500, letterSpacing:"-0.02em" }}>Message received!</h4>
+        <p style={{ margin:0, color:"var(--muted)", fontSize:14.5, maxWidth:280, lineHeight:1.6 }}>
+          Thanks for reaching out. I'll review your brief and get back to you within 24 hours.
+        </p>
+        <a href="https://cal.com/sagr-work/15min" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ marginTop:8, fontSize:13 }}>
+          Or book a 15-min call ↗
+        </a>
+      </div>
+    );
+  }
+
   return (
     <form onSubmit={submit} style={{ display:"flex", flexDirection:"column", gap:14 }}>
       <div className="form-row">
-        <label><span style={labelStyle}>Name</span><input style={inputStyle} value={state.name} onChange={e => setState({...state,name:e.target.value})} placeholder="Your name" /></label>
-        <label><span style={labelStyle}>Email</span><input style={inputStyle} type="email" value={state.email} onChange={e => setState({...state,email:e.target.value})} placeholder="you@company.com" /></label>
+        <label style={{ display:"flex", flexDirection:"column" }}>
+          <span style={labelStyle}>Full name <span style={{ color:"var(--accent)" }}>*</span></span>
+          <input required style={inputStyle} value={state.name} onChange={e => setState({...state,name:e.target.value})} placeholder="Your full name" />
+        </label>
+        <label style={{ display:"flex", flexDirection:"column" }}>
+          <span style={labelStyle}>Work email <span style={{ color:"var(--accent)" }}>*</span></span>
+          <input required type="email" style={inputStyle} value={state.email} onChange={e => setState({...state,email:e.target.value})} placeholder="you@company.com" />
+        </label>
       </div>
-      <label>
-        <span style={labelStyle}>Project type</span>
-        <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
-          {["Enterprise","Marketing Site","SaaS","Migration","Automation"].map(s =>
-            <button type="button" key={s} onClick={() => setState({...state,scope:s})} className="tag"
-              style={{ border:"0.5px solid "+(state.scope===s?"var(--fg)":"var(--line)"), color:state.scope===s?"var(--fg)":"var(--muted)", background:state.scope===s?"var(--soft)":"transparent" }}>
-              {s}
-            </button>
-          )}
-        </div>
+      <div className="form-row">
+        <label style={{ display:"flex", flexDirection:"column" }}>
+          <span style={labelStyle}>Company / brand <span style={{ color:"var(--accent)" }}>*</span></span>
+          <input required style={inputStyle} value={state.company} onChange={e => setState({...state,company:e.target.value})} placeholder="Acme Inc." />
+        </label>
+        <label style={{ display:"flex", flexDirection:"column" }}>
+          <span style={labelStyle}>Company website <span style={{ color:"var(--faint)" }}>(optional)</span></span>
+          <input type="url" style={inputStyle} value={state.website} onChange={e => setState({...state,website:e.target.value})} placeholder="https://yoursite.com" />
+        </label>
+      </div>
+      <label style={{ display:"flex", flexDirection:"column" }}>
+        <span style={labelStyle}>Tell me about the project <span style={{ color:"var(--accent)" }}>*</span></span>
+        <textarea required style={{ ...inputStyle, minHeight:110, resize:"vertical" }} value={state.msg} onChange={e => setState({...state,msg:e.target.value})} placeholder="What are you building, what's the goal, and what's getting in the way?" />
       </label>
-      <label>
-        <span style={labelStyle}>Budget</span>
-        <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
-          {["< $10k","$10–25k","$25–60k","$60k+"].map(s =>
-            <button type="button" key={s} onClick={() => setState({...state,budget:s})} className="tag"
-              style={{ border:"0.5px solid "+(state.budget===s?"var(--fg)":"var(--line)"), color:state.budget===s?"var(--fg)":"var(--muted)", background:state.budget===s?"var(--soft)":"transparent" }}>
-              {s}
-            </button>
-          )}
-        </div>
-      </label>
-      <label>
-        <span style={labelStyle}>Project</span>
-        <textarea style={{ ...inputStyle, minHeight:90, resize:"vertical" }} value={state.msg} onChange={e => setState({...state,msg:e.target.value})} placeholder="A line or two about what you're building." />
-      </label>
-      <button type="submit" className="btn btn-primary" style={{ marginTop:4, justifyContent:"space-between" }}>
-        {sent ? "Sent — talk soon ✓" : "Send brief"}
+      {status === "error" && (
+        <p style={{ margin:0, color:"#e53e3e", fontFamily:"var(--font-mono)", fontSize:11 }}>Something went wrong — try emailing me directly at contact@sagr.work</p>
+      )}
+      <button type="submit" disabled={status==="sending"} className="btn btn-primary" style={{ marginTop:4, justifyContent:"space-between", opacity: status==="sending" ? 0.7 : 1 }}>
+        {status === "sending" ? "Sending…" : "Send brief"}
         <span className="arrow">↗</span>
       </button>
     </form>
@@ -1410,7 +1465,7 @@ function Contact() {
             </p>
             <div style={{ marginTop:36, display:"flex", flexDirection:"column", gap:18, maxWidth:540 }}>
               <ContactRow label="Email" value="contact@sagr.work" href="mailto:contact@sagr.work" />
-              <ContactRow label="Schedule" value="cal.com/sagarpanchal" href="#" />
+              <ContactRow label="Schedule" value="cal.com/sagr-work/15min" href="https://cal.com/sagr-work/15min" />
               <ContactRow label="LinkedIn" value="/in/sagarpanchal" href="#" />
             </div>
           </div>
