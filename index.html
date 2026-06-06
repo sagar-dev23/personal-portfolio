@@ -42,6 +42,7 @@
     --line: rgba(244,242,236,0.10); --line-soft: rgba(244,242,236,0.06);
     --soft: rgba(244,242,236,0.04); --card: #161616;
     --accent-soft: rgba(20,110,245,0.16);
+    --logo-filter: brightness(0) invert(1);
   }
   html[data-type="tight"]   { --font-display: "Inter Tight", system-ui, sans-serif; }
   html[data-type="manrope"] { --font-display: "Manrope", system-ui, sans-serif; }
@@ -540,6 +541,11 @@
   /* ── Section padding ── */
   @media (max-width: 480px) {
     .section { padding: 52px 0 !important; }
+  }
+
+  /* ── Client logos grid ── */
+  @media (max-width: 640px) {
+    .client-logos-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 16px !important; }
   }
 </style>
 </head>
@@ -1206,23 +1212,25 @@ function Work({ layout }) {
         {layout === "mosaic" && <WorkMosaic />}
         {layout === "stacked" && <WorkStacked />}
         {/* Client logos strip */}
-        <div className="reveal" style={{ marginTop:72, borderTop:"0.5px solid var(--line)", borderBottom:"0.5px solid var(--line)", padding:"40px 0" }}>
-          <span className="mono" style={{ display:"block", marginBottom:32, textAlign:"center" }}>Clients &amp; brands I've worked with</span>
-          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", flexWrap:"wrap", gap:"32px 48px" }}>
+        <div className="reveal" style={{ marginTop:72, borderTop:"0.5px solid var(--line)", borderBottom:"0.5px solid var(--line)", padding:"48px 0" }}>
+          <span className="mono" style={{ display:"block", marginBottom:40, textAlign:"center" }}>Clients &amp; brands I've worked with</span>
+          <div className="client-logos-grid" style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:"32px 40px", alignItems:"center", maxWidth:860, margin:"0 auto" }}>
             {[
-              { name:"Phi Designs",   img:"Phi _ Browser_ centered.png", placeholder:true },
-              { name:"DevX",          img:"DevX _ Browser_ centered.png", placeholder:true },
-              { name:"Momentum91",    img:"momentum91.png",               placeholder:true },
-              { name:"AllEvents",     img:"AllEvents _ Browser_ centered.png", placeholder:true },
-              { name:"Client 5",      placeholder:true },
-              { name:"Client 6",      placeholder:true },
-            ].map((c, i) =>
-              <div key={i} style={{ display:"flex", alignItems:"center", justifyContent:"center", width:140, height:48, border:"0.5px dashed var(--line)", borderRadius:8, background:"var(--soft)" }}>
-                <span className="mono" style={{ fontSize:10, color:"var(--faint)", textAlign:"center" }}>{c.name}</span>
+              { name:"Tixa",              img:"tixa.svg" },
+              { name:"AltiusHub",         img:"altiushub.svg" },
+              { name:"BestBid",           img:"bestbid.svg" },
+              { name:"Devyami",           img:"devyami.webp" },
+              { name:"Knockout FC",       img:"knockout-fightclub.png" },
+              { name:"Ironman Lifestyle", img:"ironman lifestyle.png" },
+            ].map(c =>
+              <div key={c.name} style={{ display:"flex", alignItems:"center", justifyContent:"center", padding:"20px 24px", borderRadius:12, border:"0.5px solid var(--line)", background:"var(--card)", transition:"border-color .25s" }}
+                onMouseEnter={e => e.currentTarget.style.borderColor="var(--fg-2)"}
+                onMouseLeave={e => e.currentTarget.style.borderColor="var(--line)"}
+              >
+                <img src={c.img} alt={c.name} style={{ maxWidth:"100%", width:"auto", height:36, objectFit:"contain", display:"block", filter:"var(--logo-filter, none)" }} />
               </div>
             )}
           </div>
-          <p className="mono" style={{ textAlign:"center", marginTop:20, color:"var(--faint)", fontSize:10 }}>Drop client logos here — share files and I'll plug them in ↑</p>
         </div>
 
         <div className="reveal" style={{ marginTop:40, display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:16 }}>
