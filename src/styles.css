@@ -4,7 +4,7 @@
   --bg-2: #F2F0EA;
   --fg: #0A0A0A;
   --fg-2: #1A1A1A;
-  --muted: rgba(10,10,10,0.56);
+  --muted: rgba(10,10,10,0.6);
   --faint: rgba(10,10,10,0.36);
   --line: rgba(10,10,10,0.10);
   --line-soft: rgba(10,10,10,0.06);
@@ -271,7 +271,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .bento { display: grid; grid-template-columns: repeat(12,1fr); grid-auto-rows: minmax(120px,auto); gap: 16px; }
 .bento .b { background: var(--card); border: 0.5px solid var(--line); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; min-height: 160px; transition: border-color .3s, transform .5s; }
 .bento .b:hover { border-color: var(--fg-2); }
-.bento h4 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 18px; letter-spacing: -0.015em; }
+.bento h3, .bento h4 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 18px; letter-spacing: -0.015em; }
 .bento p { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.55; }
 @media (max-width: 880px) {
   .bento { grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -319,7 +319,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 32px; padding: 56px 0 28px; border-top: 0.5px solid var(--line); }
 @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
-.foot-col h6 { margin: 0 0 16px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+.foot-col .foot-h { margin: 0 0 16px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
 .foot-col a { display: block; padding: 4px 0; font-size: 14px; color: var(--fg-2); }
 .foot-col a:hover { color: var(--accent); }
 
@@ -432,7 +432,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 @media (max-width: 560px) {
   .bento { grid-template-columns: 1fr; gap: 10px; }
   .bento .b { grid-column: 1 !important; min-height: unset; }
-  .bento h4 { font-size: 16px !important; }
+  .bento h3, .bento h4 { font-size: 16px !important; }
   .bento p { font-size: 13.5px !important; }
 }
 

@@ -142,18 +142,18 @@ export default function Contact() {
         {/* Footer */}
         <footer className="footer-grid" style={{ borderWidth:"0px" }}>
           <div className="foot-col">
-            <h6>Sagar Panchal</h6>
+            <p className="foot-h">Sagar Panchal</p>
             <p style={{ margin:0, color:"var(--muted)", fontSize:13.5, maxWidth:320 }}>Webflow developer &amp; designer building enterprise-grade marketing sites, CMS systems, and automations.</p>
           </div>
           <nav className="foot-col" aria-label="Footer">
-            <h6>Sitemap</h6>
+            <p className="foot-h">Sitemap</p>
             <a href="#about">About</a>
             <a href="#services">Services</a>
             <a href="#work">Work</a>
             <a href="#contact">Contact</a>
           </nav>
           <div className="foot-col">
-            <h6>Connect</h6>
+            <p className="foot-h">Connect</p>
             <a href={`mailto:${EMAIL}`}>Email ↗</a>
             <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
             <a href={CAL_URL} target="_blank" rel="noopener noreferrer">Schedule a call ↗</a>

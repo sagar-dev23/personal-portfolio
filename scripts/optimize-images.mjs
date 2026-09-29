@@ -9,16 +9,15 @@ const SRC = "assets-src";
 const OUT = "public/images";
 const MANIFEST = "src/images.json";
 
-// kind: "shot" = large browser screenshot (responsive WebP, 800w + 1600w)
-//       "photo" = photo (single WebP)
-//       "logo"  = raster logo, resized to `max` px on its longest needed axis
+// kind: "shot" = responsive WebP at `widths` (default 800w + 1600w)
+//       "logo"  = raster logo, resized to `width` or `height`
 //       "svg"   = copied untouched
 const JOBS = [
   { key: "work-phi",        src: "Phi _ Browser_ centered.png",       kind: "shot" },
   { key: "work-devx",       src: "DevX _ Browser_ centered.png",      kind: "shot" },
   { key: "work-momentum91", src: "momentum91.png",                    kind: "shot" },
   { key: "work-allevents",  src: "AllEvents _ Browser_ centered.png", kind: "shot" },
-  { key: "portrait",        src: "portrait.png",                      kind: "photo" },
+  { key: "portrait",        src: "portrait.png",                      kind: "shot", widths: [400, 800] },
 
   { key: "logo-webflow",    src: "webflow logo.svg",            kind: "svg" },
   { key: "logo-github",     src: "github_PNG25.png",            kind: "logo", width: 320 },
@@ -60,7 +59,7 @@ async function main() {
     }
 
     if (job.kind === "shot") {
-      const sizes = [800, 1600];
+      const sizes = job.widths || [800, 1600];
       const variants = [];
       for (const w of sizes) {
         const file = `${job.key}-${w}.webp`;
@@ -82,7 +81,7 @@ async function main() {
     let pipeline = sharp(input);
     if (job.width && meta.width > job.width) pipeline = pipeline.resize({ width: job.width });
     if (job.height && meta.height > job.height) pipeline = pipeline.resize({ height: job.height });
-    const info = await pipeline.webp({ quality: job.kind === "photo" ? 86 : 92, alphaQuality: 100, effort: 6 }).toFile(path.join(OUT, file));
+    const info = await pipeline.webp({ quality: 92, alphaQuality: 100, effort: 6 }).toFile(path.join(OUT, file));
     manifest[job.key] = { src: `/images/${file}`, width: info.width, height: info.height };
     console.log(`${job.key}: ${kb(inSize)} -> ${kb(info.size)} (${info.width}x${info.height})`);
   }

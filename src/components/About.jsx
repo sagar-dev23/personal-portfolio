@@ -81,11 +81,11 @@ export default function About() {
           {/* Portrait + bio */}
           <div className="b" style={{ gridColumn:"span 5", gridRow:"span 2", padding:0, overflow:"hidden", display:"flex", flexDirection:"column" }}>
             <div style={{ flex:1, minHeight:280, borderRadius:0, overflow:"hidden", position:"relative" }}>
-              <Img name="portrait" alt="Portrait of Sagar Panchal, freelance Webflow developer" style={{ width:"100%", height:"100%", objectFit:"cover", display:"block", position:"absolute", inset:0 }} />
+              <Img name="portrait" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 880px) 45vw, 38vw" alt="Portrait of Sagar Panchal, freelance Webflow developer" style={{ width:"100%", height:"100%", objectFit:"cover", display:"block", position:"absolute", inset:0 }} />
             </div>
             <div style={{ padding:24, display:"flex", flexDirection:"column", gap:14 }}>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"baseline" }}>
-                <h4 style={{ margin:0, fontSize:22, fontFamily:"var(--font-display)", fontWeight:500, letterSpacing:"-0.02em" }}>Sagar Panchal</h4>
+                <h3 style={{ margin:0, fontSize:22, fontFamily:"var(--font-display)", fontWeight:500, letterSpacing:"-0.02em" }}>Sagar Panchal</h3>
                 <span className="pill" style={{ height:24 }}><span className="dot"/>Open</span>
               </div>
               <p style={{ margin:0, color:"var(--muted)", fontSize:14.5 }}>Webflow developer &amp; designer building enterprise-grade marketing sites, CMS architectures, and automations that scale past launch.</p>
@@ -153,7 +153,7 @@ export default function About() {
           {/* Approach card */}
           <div className="b" style={{ gridColumn:"span 5", background:"var(--fg)", color:"var(--bg)", borderColor:"var(--fg)" }}>
             <span className="mono" style={{ color:"rgba(200,200,200,0.7)" }}>Approach</span>
-            <h4 style={{ color:"var(--bg)", fontSize:20, lineHeight:1.2 }}>Strategy, design, build and automation — one craftsman, end&nbsp;to&nbsp;end.</h4>
+            <h3 style={{ color:"var(--bg)", fontSize:20, lineHeight:1.2 }}>Strategy, design, build and automation — one craftsman, end&nbsp;to&nbsp;end.</h3>
           </div>
         </div>
 

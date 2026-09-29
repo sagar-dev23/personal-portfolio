@@ -59,14 +59,23 @@ function GridCanvas() {
           ctx.beginPath(); ctx.arc(d.x, d.y, radius, 0, Math.PI*2); ctx.fill();
         }
       }
-      raf = requestAnimationFrame(loop);
+      if (running) raf = requestAnimationFrame(loop);
     }
+    // The grid only reacts to a mouse, so touch devices (and reduced-motion users)
+    // get a single static frame; elsewhere the loop pauses while the hero is off screen.
+    const staticOnly = window.matchMedia("(hover: none), (pointer: coarse), (prefers-reduced-motion: reduce)").matches;
+    let running = false;
+    function start() { if (running || staticOnly) return; running = true; raf = requestAnimationFrame(loop); }
+    function stop() { running = false; cancelAnimationFrame(raf); }
+    function onResize() { resize(); if (!running) loop(); }
+    const io = new IntersectionObserver(([en]) => { en.isIntersecting ? start() : stop(); });
     resize();
-    window.addEventListener("resize", resize);
+    loop();
+    io.observe(canvas);
+    window.addEventListener("resize", onResize);
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseleave", onLeave);
-    loop();
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", resize); window.removeEventListener("mousemove", onMove); window.removeEventListener("mouseleave", onLeave); };
+    return () => { stop(); io.disconnect(); window.removeEventListener("resize", onResize); window.removeEventListener("mousemove", onMove); window.removeEventListener("mouseleave", onLeave); };
   }, []);
   return <canvas ref={ref} className="grid-canvas" aria-hidden="true" />;
 }

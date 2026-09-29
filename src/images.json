@@ -24,7 +24,8 @@
     "height": 900
   },
   "portrait": {
-    "src": "/images/portrait.webp",
+    "src": "/images/portrait-800.webp",
+    "srcSet": "/images/portrait-400.webp 400w, /images/portrait-800.webp 800w",
     "width": 800,
     "height": 800
   },
