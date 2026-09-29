@@ -1,6 +1,6 @@
 # sagr.work
 
-Portfolio site for Sagar Panchal. Vite + React, prerendered to static HTML at build time and served by a Cloudflare Worker (static assets).
+Portfolio site for Sagar Panchal. Vite + React, prerendered to static HTML at build time and served by a Cloudflare Worker (static assets). `worker/index.js` only answers search-engine verification URLs (see `run_worker_first` in `wrangler.jsonc`).
 
 ```bash
 npm install

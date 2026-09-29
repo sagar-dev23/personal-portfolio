@@ -7,10 +7,14 @@
   "build": {
     "command": "npm run build"
   },
-  // Static-only Worker: serves the prerendered Vite build from dist/.
+  "main": "worker/index.js",
+  // Serves the prerendered Vite build from dist/. The Worker script only runs
+  // for the paths in run_worker_first (search-engine verification files).
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/google141e7734458b5ef6.html"]
   }
 }
