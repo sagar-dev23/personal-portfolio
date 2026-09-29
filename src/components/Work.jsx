@@ -32,9 +32,9 @@ function WorkStacked() {
             <h3 style={{ fontSize:"clamp(20px,2.4vw,36px)" }}>{p.title}</h3>
             <p style={{ margin:0, color:"var(--muted)", fontSize:15, maxWidth:460 }}>{p.sub}</p>
             <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>{p.tags.map(t => <span key={t} className="tag">{t}</span>)}</div>
-            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", paddingTop:16, borderTop:"0.5px solid var(--line)", marginTop:8 }}>
+            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", paddingTop:16, borderTop:"0.5px solid var(--line)", marginTop:8, gap:16 }}>
               <span className="mono" style={{ color:"var(--accent)", letterSpacing:"0.02em" }}>{p.metric}</span>
-              <span style={{ fontFamily:"var(--font-display)", fontSize:14, color:"var(--accent)" }}>View project ↗</span>
+              <span style={{ fontFamily:"var(--font-display)", fontSize:14, color:"var(--accent)", whiteSpace:"nowrap" }}>View project ↗</span>
             </div>
           </div>
         </a>

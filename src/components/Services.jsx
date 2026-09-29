@@ -21,7 +21,7 @@ export default function Services() {
                 <p className="svc-desc">{s.d}</p>
                 <div className="svc-tags">{s.tags.map(tg => <span key={tg} className="tag">{tg}</span>)}</div>
               </div>
-              <a href="#contact" className="ulink mono" style={{ alignSelf:"center", paddingTop:8, color:"var(--fg-2)", whiteSpace:"nowrap" }}>Enquire ↗</a>
+              <a href="#contact" className="ulink mono" style={{ alignSelf:"center", justifySelf:"start", paddingTop:8, color:"var(--fg-2)", whiteSpace:"nowrap" }}>Enquire ↗</a>
             </div>
           )}
         </div>

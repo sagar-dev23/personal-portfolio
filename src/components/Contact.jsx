@@ -133,7 +133,7 @@ export default function Contact() {
         </div>
 
         {/* Wordmark */}
-        <div className="reveal" aria-hidden="true" style={{ overflow:"hidden", borderTop:"0.5px solid var(--line)", marginTop:"clamp(60px, 10vw, 120px)", padding:"clamp(24px, 4vw, 40px) 0" }}>
+        <div className="reveal wordmark-wrap" aria-hidden="true" style={{ overflow:"hidden", borderTop:"0.5px solid var(--line)", marginTop:"clamp(60px, 10vw, 120px)", padding:"clamp(24px, 4vw, 40px) 0" }}>
           <div className="wordmark" style={{ letterSpacing:"-0.06em", whiteSpace:"nowrap", textAlign:"center" }}>
             Sagar&nbsp;Panchal<span style={{ color:"var(--accent)" }}>.</span>
           </div>
