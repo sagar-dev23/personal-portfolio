@@ -2,6 +2,11 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "sagr-work",
   "compatibility_date": "2026-09-29",
+  // Build before every `wrangler deploy`, so dist/ exists even if the
+  // Cloudflare dashboard has no build command configured.
+  "build": {
+    "command": "npm run build"
+  },
   // Static-only Worker: serves the prerendered Vite build from dist/.
   "assets": {
     "directory": "./dist",

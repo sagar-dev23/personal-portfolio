@@ -7,11 +7,11 @@ npm install
 npm run dev         # local dev server
 npm run build       # production build -> dist/
 npm run cf:preview  # build + run the Worker locally (wrangler dev)
-npm run deploy      # build + deploy to Cloudflare
+npm run deploy      # build + deploy to Cloudflare (wrangler runs the build itself)
 npm run images      # regenerate public/images/ from assets-src/
 ```
 
 Cloudflare Workers Builds (Git integration) settings:
 
-- Build command: `npm run build`
+- Build command: leave empty (`wrangler.jsonc` runs `npm run build` before every deploy)
 - Deploy command: `npx wrangler deploy`

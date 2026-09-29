@@ -6,8 +6,8 @@
     "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
     "preview": "vite preview",
     "images": "node scripts/optimize-images.mjs",
-    "deploy": "npm run build && wrangler deploy",
-    "cf:preview": "npm run build && wrangler dev"
+    "deploy": "wrangler deploy",
+    "cf:preview": "wrangler dev"
   },
   "repository": {
     "type": "git",
