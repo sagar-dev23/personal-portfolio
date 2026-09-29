@@ -1,0 +1,121 @@
+{
+  "work-phi": {
+    "src": "/images/work-phi-1600.webp",
+    "srcSet": "/images/work-phi-800.webp 800w, /images/work-phi-1600.webp 1600w",
+    "width": 1600,
+    "height": 900
+  },
+  "work-devx": {
+    "src": "/images/work-devx-1600.webp",
+    "srcSet": "/images/work-devx-800.webp 800w, /images/work-devx-1600.webp 1600w",
+    "width": 1600,
+    "height": 900
+  },
+  "work-momentum91": {
+    "src": "/images/work-momentum91-1600.webp",
+    "srcSet": "/images/work-momentum91-800.webp 800w, /images/work-momentum91-1600.webp 1600w",
+    "width": 1600,
+    "height": 900
+  },
+  "work-allevents": {
+    "src": "/images/work-allevents-1600.webp",
+    "srcSet": "/images/work-allevents-800.webp 800w, /images/work-allevents-1600.webp 1600w",
+    "width": 1600,
+    "height": 900
+  },
+  "portrait": {
+    "src": "/images/portrait.webp",
+    "width": 800,
+    "height": 800
+  },
+  "logo-webflow": {
+    "src": "/images/logo-webflow.svg",
+    "width": 1080,
+    "height": 181
+  },
+  "logo-github": {
+    "src": "/images/logo-github.webp",
+    "width": 320,
+    "height": 119
+  },
+  "logo-clickup": {
+    "src": "/images/logo-clickup.webp",
+    "width": 320,
+    "height": 78
+  },
+  "logo-notion": {
+    "src": "/images/logo-notion.webp",
+    "width": 320,
+    "height": 111
+  },
+  "logo-clarity": {
+    "src": "/images/logo-clarity.webp",
+    "width": 320,
+    "height": 102
+  },
+  "logo-hubspot": {
+    "src": "/images/logo-hubspot.webp",
+    "width": 320,
+    "height": 94
+  },
+  "logo-zapier": {
+    "src": "/images/logo-zapier.svg",
+    "width": 2500,
+    "height": 676
+  },
+  "logo-make": {
+    "src": "/images/logo-make.webp",
+    "width": 320,
+    "height": 66
+  },
+  "logo-n8n": {
+    "src": "/images/logo-n8n.svg",
+    "width": 500,
+    "height": 200
+  },
+  "logo-ga4": {
+    "src": "/images/logo-ga4.webp",
+    "width": 320,
+    "height": 110
+  },
+  "logo-gtm": {
+    "src": "/images/logo-gtm.webp",
+    "width": 320,
+    "height": 180
+  },
+  "logo-figma": {
+    "src": "/images/logo-figma.webp",
+    "width": 320,
+    "height": 180
+  },
+  "client-tixa": {
+    "src": "/images/client-tixa.svg",
+    "width": 167,
+    "height": 38
+  },
+  "client-altiushub": {
+    "src": "/images/client-altiushub.svg",
+    "width": 1466,
+    "height": 138
+  },
+  "client-bestbid": {
+    "src": "/images/client-bestbid.svg",
+    "width": 86,
+    "height": 23
+  },
+  "client-devyami": {
+    "src": "/images/client-devyami.webp",
+    "width": 228,
+    "height": 64
+  },
+  "client-knockout": {
+    "src": "/images/client-knockout.webp",
+    "width": 215,
+    "height": 64
+  },
+  "client-ironman": {
+    "src": "/images/client-ironman.webp",
+    "width": 150,
+    "height": 33
+  }
+}

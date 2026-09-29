@@ -1,0 +1,29 @@
+{
+  "name": "sagr-work",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "preview": "vite preview",
+    "images": "node scripts/optimize-images.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sagar-dev23/personal-portfolio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sagar-dev23/personal-portfolio/issues"
+  },
+  "homepage": "https://github.com/sagar-dev23/personal-portfolio#readme",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "sharp": "^0.35.5",
+    "vite": "^6.4.3"
+  },
+  "private": true,
+  "type": "module"
+}
