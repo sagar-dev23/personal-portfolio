@@ -96,7 +96,7 @@ export default function Hero() {
           <span className="pill"><span className="dot" />Open for work</span>
         </div>
         <h1 className="display" style={{ margin: 0, maxWidth: "1180px", fontSize: "clamp(36px, 6.6vw, 96px)", color: "var(--fg)" }}>
-          Webflow sites that turn visitors into leads, and route them into your CRM automatically<span style={{ color: "var(--accent)" }}>.</span>
+          Websites that capture leads and route them to your CRM<span style={{ color: "var(--accent)" }}>.</span>
         </h1>
         <div className="hero-foot">
           <p style={{ margin: 0, fontSize: 18, lineHeight: 1.55, color: "var(--muted)", maxWidth: 560 }}>
