@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "sagr-work",
+  "name": "personal-portfolio",
   "compatibility_date": "2026-09-29",
   // Build before every `wrangler deploy`, so dist/ exists even if the
   // Cloudflare dashboard has no build command configured.
