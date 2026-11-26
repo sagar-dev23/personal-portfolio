@@ -89,6 +89,41 @@
     "width": 320,
     "height": 180
   },
+  "auto-lead-sync-1": {
+    "src": "/images/auto-lead-sync-1.webp",
+    "width": 370,
+    "height": 306
+  },
+  "auto-lead-sync-2": {
+    "src": "/images/auto-lead-sync-2.webp",
+    "width": 1006,
+    "height": 761
+  },
+  "auto-lead-automation": {
+    "src": "/images/auto-lead-automation.webp",
+    "width": 620,
+    "height": 742
+  },
+  "auto-lead-routing": {
+    "src": "/images/auto-lead-routing.webp",
+    "width": 775,
+    "height": 735
+  },
+  "auto-roi-zap": {
+    "src": "/images/auto-roi-zap.webp",
+    "width": 219,
+    "height": 604
+  },
+  "auto-roi-report": {
+    "src": "/images/auto-roi-report.webp",
+    "width": 1024,
+    "height": 489
+  },
+  "auto-roi-calculator": {
+    "src": "/images/auto-roi-calculator.webp",
+    "width": 540,
+    "height": 771
+  },
   "client-tixa": {
     "src": "/images/client-tixa.svg",
     "width": 167,

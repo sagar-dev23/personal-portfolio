@@ -10,6 +10,7 @@ const OUT = "public/images";
 const MANIFEST = "src/images.json";
 
 // kind: "shot" = responsive WebP at `widths` (default 800w + 1600w)
+//       "native" = single WebP at the source size (screenshots that are already small)
 //       "logo"  = raster logo, resized to `width` or `height`
 //       "svg"   = copied untouched
 const JOBS = [
@@ -31,6 +32,15 @@ const JOBS = [
   { key: "logo-ga4",        src: "Logo_Google_Analytics.png",   kind: "logo", width: 320 },
   { key: "logo-gtm",        src: "google tag manager.png",      kind: "logo", width: 320 },
   { key: "logo-figma",      src: "Figma-Logo.png",              kind: "logo", width: 320 },
+
+  // Automation screenshots from Sagar's Notion project notes (already small, kept at native size).
+  { key: "auto-lead-sync-1",     src: "automation/lead-sync-n8n-1.png",     kind: "native" },
+  { key: "auto-lead-sync-2",     src: "automation/lead-sync-n8n-2.png",     kind: "native" },
+  { key: "auto-lead-automation", src: "automation/lead-automation-zap.png", kind: "native" },
+  { key: "auto-lead-routing",    src: "automation/lead-routing-zap.png",    kind: "native" },
+  { key: "auto-roi-zap",         src: "automation/roi-zap.png",             kind: "native" },
+  { key: "auto-roi-report",      src: "automation/roi-report.png",          kind: "native" },
+  { key: "auto-roi-calculator",  src: "automation/roi-calculator.png",      kind: "native" },
 
   { key: "client-tixa",      src: "tixa.svg",                    kind: "svg" },
   { key: "client-altiushub", src: "altiushub.svg",               kind: "svg" },
@@ -74,6 +84,14 @@ async function main() {
         height: big.h,
       };
       console.log(`${job.key}: ${kb(inSize)} png -> ${variants.map(v => `${v.w}w ${kb(v.size)}`).join(", ")}`);
+      continue;
+    }
+
+    if (job.kind === "native") {
+      const file = `${job.key}.webp`;
+      const info = await sharp(input).webp({ quality: 90, effort: 6 }).toFile(path.join(OUT, file));
+      manifest[job.key] = { src: `/images/${file}`, width: info.width, height: info.height };
+      console.log(`${job.key}: ${kb(inSize)} -> ${kb(info.size)} (${info.width}x${info.height})`);
       continue;
     }
 
