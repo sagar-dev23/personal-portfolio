@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Label, Scribble } from "../components/shared.jsx";
 import { ProjectCard, CtaBand, MoreProjects } from "../components/Cards.jsx";
-import { ALL_PROJECTS, hasCaseStudy } from "../content/projects.js";
+import { ALL_PROJECTS, hasCard } from "../content/projects.js";
 
 const FILTERS = [
   { id: "all", label: "All Projects" },
@@ -9,8 +9,8 @@ const FILTERS = [
   { id: "automation", label: "Automation & Integrations" },
 ];
 
-const WITH_CASE = ALL_PROJECTS.filter(hasCaseStudy);
-const PENDING = ALL_PROJECTS.filter(p => !hasCaseStudy(p));
+const WITH_CASE = ALL_PROJECTS.filter(hasCard);
+const PENDING = ALL_PROJECTS.filter(p => !hasCard(p));
 
 export default function Work() {
   const [filter, setFilter] = useState("all");
@@ -35,7 +35,7 @@ export default function Work() {
           <p className="crumbs reveal in"><a href="/">Home</a> / <span>Work</span></p>
           <Label n="01">work</Label>
           <h1 id="work-title" className="h1 reveal in">Things I've built<span className="mark-inline">, <span className="mark">and wired up<Scribble type="underline" className="in" /></span></span>.</h1>
-          <p className="hero-lede reveal in">Websites on one side, automations on the other. Every case study sticks to what actually happened on the project.</p>
+          <p className="hero-lede reveal in">Websites on one side, automations on the other. Websites link to the live site; automations have full case studies.</p>
           <div className="filters reveal in" role="group" aria-label="Filter projects">
             {FILTERS.map(f => (
               <button key={f.id} type="button" className="filter" aria-pressed={filter === f.id} onClick={() => choose(f.id)}>

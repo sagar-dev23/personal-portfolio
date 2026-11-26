@@ -1,9 +1,9 @@
 import { Button, Scribble, SectionHead, Label, Tags } from "../components/shared.jsx";
 import { ProjectCard, Process, CtaBand, BrowserShot, MoreProjects } from "../components/Cards.jsx";
-import { WEB_PROJECTS, hasCaseStudy } from "../content/projects.js";
+import { WEB_PROJECTS, hasCard } from "../content/projects.js";
 import { WEB_SERVICES, WEB_PROCESS } from "../content/site.js";
 
-const FAN = ["momentum91", "phi-designs", "devx"].map(s => WEB_PROJECTS.find(p => p.slug === s));
+const FAN = ["dhyanam-digital", "bestbid", "shree-air-compressors"].map(s => WEB_PROJECTS.find(p => p.slug === s));
 
 export default function WebsiteDevelopment() {
   return (
@@ -56,9 +56,9 @@ export default function WebsiteDevelopment() {
             <a className="text-link reveal" href="/work?filter=web">All website projects →</a>
           </div>
           <div className="pc-grid">
-            {WEB_PROJECTS.filter(hasCaseStudy).map(p => <ProjectCard key={p.slug} p={p} />)}
+            {WEB_PROJECTS.filter(hasCard).map(p => <ProjectCard key={p.slug} p={p} />)}
           </div>
-          <MoreProjects projects={WEB_PROJECTS.filter(p => !hasCaseStudy(p))} />
+          <MoreProjects projects={WEB_PROJECTS.filter(p => !hasCard(p))} />
         </div>
       </section>
 

@@ -41,7 +41,8 @@ function AutomationThumb({ p }) {
 
 export function ProjectCard({ p, eager, headingLevel = 3 }) {
   const ref = useTilt();
-  const href = projectUrl(p);
+  const caseUrl = projectUrl(p);
+  const href = caseUrl || p.url;
   const H = `h${headingLevel}`;
   const isAuto = p.category === "automation";
   const body = (
@@ -58,12 +59,12 @@ export function ProjectCard({ p, eager, headingLevel = 3 }) {
         <H className="pc-title">{p.name}</H>
         {p.summary && <p className="pc-summary">{p.summary}</p>}
         {p.stack && <Tags items={p.stack.slice(0, 4)} />}
-        <span className="pc-cta">{href ? <>View case study <span aria-hidden="true">→</span></> : "Case study coming soon"}</span>
+        <span className="pc-cta">{caseUrl ? <>View case study <span aria-hidden="true">→</span></> : href ? <>Visit live site <span aria-hidden="true">↗</span></> : "Case study coming soon"}</span>
       </div>
     </>
   );
   return href
-    ? <a ref={ref} href={href} className={`pc ${isAuto ? "is-auto" : "is-web"}`}>{body}</a>
+    ? <a ref={ref} href={href} className={`pc ${isAuto ? "is-auto" : "is-web"}`} {...(caseUrl ? {} : { target: "_blank", rel: "noopener" })}>{body}</a>
     : <div ref={ref} className="pc is-pending">{body}</div>;
 }
 
@@ -74,7 +75,7 @@ export function MoreProjects({ projects }) {
     <div className="more-projects reveal">
       <p className="more-projects-h">// also built</p>
       <ul aria-label="More website projects">{projects.map(p => <li key={p.slug}>{p.name}</li>)}</ul>
-      <p className="more-projects-note">Case studies for these are on the way.</p>
+      <p className="more-projects-note">More details soon.</p>
     </div>
   );
 }

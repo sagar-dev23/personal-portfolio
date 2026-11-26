@@ -4,77 +4,65 @@
 // Website project fields:
 //   slug, name, category: "web", year, url, img (key in images.json), alt,
 //   summary (card), overview, role, scope[], stack[], outcome[] (real, stated metrics only)
-//   caseStudy: false -> card only, no /work/<slug> page (not enough detail yet)
+//   caseStudy: false -> no /work/<slug> page; the card links to the live site instead
 //
 // Automation project fields:
 //   slug, name, category: "automation", status: "built", platform, summary, overview, problem,
 //   flow[] (diagram nodes), workflow[] (step text), stack[], shots[] ({ img, alt })
 
+// Website projects. Descriptions come from each live site; the platform was read
+// from the site itself (Webflow / WordPress markup, Next.js build files).
 export const WEB_PROJECTS = [
   {
-    slug: "momentum91",
-    name: "Momentum91",
+    slug: "shree-air-compressors",
+    name: "Shree Air Compressors",
     category: "web",
-    year: "2026",
-    url: "https://www.momentum91.com",
-    img: "work-momentum91",
-    alt: "Momentum91 website homepage built in Webflow, shown in a browser window",
-    summary: "Webflow site build and CMS structure for a digital product agency, done in-house.",
-    overview: "Momentum91 is a digital product agency. I worked there in-house, building the agency's own Webflow website and delivering client projects across Webflow, automation and growth.",
-    role: "In-house Webflow developer at Momentum91",
-    scope: ["Webflow site build", "CMS structure", "Brand presence for the agency", "Client projects across Webflow, automation and growth"],
-    stack: ["Webflow", "Custom Code", "Integrations & Automations"],
-    outcome: ["90+ PageSpeed", "5+ client projects delivered"],
+    caseStudy: false,
+    url: "https://shreeaircompressors.com/",
+    img: "work-shree",
+    alt: "Shree Air Compressors homepage: industrial air compressor manufacturer in India, with a product range bar and quote buttons",
+    summary: "Website for an ISO 9001:2015 certified air compressor manufacturer and exporter in Ahmedabad, hand-coded in HTML, CSS and JavaScript.",
+    overview: "Shree Air Compressors is an ISO 9001:2015 certified manufacturer and exporter of reciprocating and screw air compressors, vacuum pumps, air dryers and receiver tanks, based in Ahmedabad and exporting to 23+ countries. The site is hand-coded in HTML, CSS and JavaScript, with no website builder underneath.",
+    stack: ["HTML", "CSS", "JavaScript"],
   },
   {
-    slug: "phi-designs",
-    name: "Phi Designs",
+    slug: "downdating",
+    name: "Downdating",
     category: "web",
-    year: "2025",
-    url: "https://www.phidesigns.in/",
-    img: "work-phi",
-    alt: "Phi Designs office interiors website homepage built in Webflow, shown in a browser window",
-    summary: "Marketing site for a premium office interiors studio, with a CMS migration across 13 collections.",
-    overview: "Phi Designs designs premium office interiors. The work centred on migrating their content into Webflow CMS and structuring a large project portfolio.",
-    scope: ["Webflow CMS migration", "Portfolio architecture across 13 CMS collections", "Integrations & automations"],
-    stack: ["Webflow", "CMS", "Integrations & Automations"],
-    outcome: ["90+ PageSpeed", "150+ pages"],
+    caseStudy: false,
+    url: "http://downdating.co.in/",
+    img: "work-downdating",
+    alt: "Downdating homepage built in Webflow: 'Built for people who want real connection' with a chat-style coach panel",
+    summary: "Webflow website for a dating coaching brand that helps people fix their profile, their texting and their confidence.",
+    overview: "Downdating is a dating coaching service: it helps people improve their profile, their texting and their confidence so they meet people who fit them. The website is built in Webflow and covers plans, events and booking a call.",
+    stack: ["Webflow"],
   },
   {
-    slug: "devx",
-    name: "DevX",
+    slug: "dhyanam-digital",
+    name: "Dhyanam Digital",
     category: "web",
-    year: "2025",
-    url: "https://www.devx.work",
-    img: "work-devx",
-    alt: "DevX managed office spaces website homepage built in Webflow, shown in a browser window",
-    summary: "Landing page optimisation and call-button conversion tracking for a managed office spaces brand.",
-    overview: "DevX runs managed office spaces. I worked on their Webflow marketing site, optimising landing pages and setting up conversion tracking for campaign traffic.",
-    scope: ["Landing page optimisation", "GTM setup for call-button conversion tracking across campaigns", "Webflow CMS"],
-    stack: ["Webflow", "CMS", "Google Tag Manager", "Integrations & Automations"],
-    outcome: ["250+ blogs", "200+ pages"],
+    caseStudy: false,
+    url: "http://dhyanamdigital.com/",
+    img: "work-dhyanam",
+    alt: "Dhyanam Digital Solution homepage: 'Grow your brand where customers search, scroll and ask AI'",
+    summary: "Website for a full-service digital marketing agency in Gandhinagar, built with Next.js.",
+    overview: "Dhyanam Digital Solution is a full-service digital marketing agency in Gandhinagar, India, helping businesses get found on Google and in AI answers, build their brand on social and turn attention into leads. The site is built with Next.js and includes services, case studies and a blog.",
+    stack: ["Next.js"],
   },
   {
-    slug: "allevents",
-    name: "AllEvents",
+    slug: "bestbid",
+    name: "BestBid",
     category: "web",
-    year: "2025",
-    url: "https://allevents-landing-page.webflow.io/",
-    img: "work-allevents",
-    alt: "AllEvents paid-ads landing page built in Webflow, shown in a browser window",
-    summary: "A conversion-focused Webflow landing page for a global events platform's paid ad campaigns.",
-    overview: "AllEvents is a global events platform. This was a landing page built on Webflow for paid ad campaigns, optimised for speed and lead capture.",
-    scope: ["Landing page design build", "Speed optimisation", "Lead capture"],
-    stack: ["Webflow", "Landing Page", "Ads"],
-    outcome: ["90+ PageSpeed"],
+    caseStudy: false,
+    url: "https://bestbid.store/",
+    img: "work-bestbid",
+    alt: "BestBid online store homepage: 'Essential Luxury - Watches, Cameras, Cellphones & Travel Gear' with category tiles",
+    summary: "WooCommerce store on WordPress for luxury watches, cameras, phones and travel gear.",
+    overview: "BestBid is an online store for 'essential luxury': watches, cameras, cellphones and travel gear. It runs on WordPress with WooCommerce, with shopping by category and brand.",
+    stack: ["WordPress", "WooCommerce"],
   },
-  // Listed by Sagar as his work; details, links and images still to be added.
-  { slug: "storylane", name: "Storylane", category: "web", caseStudy: false },
+  // Approved by Sagar to mention; link and details still to come.
   { slug: "tixar", name: "Tixar", category: "web", caseStudy: false },
-  { slug: "shree-air-compressors", name: "Shree Air Compressors", category: "web", caseStudy: false },
-  { slug: "lev8", name: "Lev8", category: "web", caseStudy: false },
-  { slug: "mega-ai", name: "Mega.ai", category: "web", caseStudy: false },
-  { slug: "stanfoxes", name: "Stanfoxes", category: "web", caseStudy: false },
 ];
 
 // Built projects: from Sagar's Notion project notes (overview, workflow, tools and
@@ -238,3 +226,5 @@ export const LAB_PROJECTS = [
 export const ALL_PROJECTS = [...WEB_PROJECTS, ...AUTOMATION_PROJECTS];
 export const hasCaseStudy = p => p.caseStudy !== false;
 export const projectUrl = p => (hasCaseStudy(p) ? `/work/${p.slug}` : null);
+// Gets a full card: has its own case study, or at least a live site to link to.
+export const hasCard = p => hasCaseStudy(p) || Boolean(p.url);

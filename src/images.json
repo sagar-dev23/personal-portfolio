@@ -1,27 +1,27 @@
 {
-  "work-phi": {
-    "src": "/images/work-phi-1600.webp",
-    "srcSet": "/images/work-phi-800.webp 800w, /images/work-phi-1600.webp 1600w",
+  "work-shree": {
+    "src": "/images/work-shree-1600.webp",
+    "srcSet": "/images/work-shree-800.webp 800w, /images/work-shree-1600.webp 1600w",
     "width": 1600,
-    "height": 900
+    "height": 1000
   },
-  "work-devx": {
-    "src": "/images/work-devx-1600.webp",
-    "srcSet": "/images/work-devx-800.webp 800w, /images/work-devx-1600.webp 1600w",
+  "work-downdating": {
+    "src": "/images/work-downdating-1600.webp",
+    "srcSet": "/images/work-downdating-800.webp 800w, /images/work-downdating-1600.webp 1600w",
     "width": 1600,
-    "height": 900
+    "height": 1000
   },
-  "work-momentum91": {
-    "src": "/images/work-momentum91-1600.webp",
-    "srcSet": "/images/work-momentum91-800.webp 800w, /images/work-momentum91-1600.webp 1600w",
+  "work-dhyanam": {
+    "src": "/images/work-dhyanam-1600.webp",
+    "srcSet": "/images/work-dhyanam-800.webp 800w, /images/work-dhyanam-1600.webp 1600w",
     "width": 1600,
-    "height": 900
+    "height": 1000
   },
-  "work-allevents": {
-    "src": "/images/work-allevents-1600.webp",
-    "srcSet": "/images/work-allevents-800.webp 800w, /images/work-allevents-1600.webp 1600w",
+  "work-bestbid": {
+    "src": "/images/work-bestbid-1600.webp",
+    "srcSet": "/images/work-bestbid-800.webp 800w, /images/work-bestbid-1600.webp 1600w",
     "width": 1600,
-    "height": 900
+    "height": 1000
   },
   "portrait": {
     "src": "/images/portrait-800.webp",

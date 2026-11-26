@@ -14,10 +14,11 @@ const MANIFEST = "src/images.json";
 //       "logo"  = raster logo, resized to `width` or `height`
 //       "svg"   = copied untouched
 const JOBS = [
-  { key: "work-phi",        src: "Phi _ Browser_ centered.png",       kind: "shot" },
-  { key: "work-devx",       src: "DevX _ Browser_ centered.png",      kind: "shot" },
-  { key: "work-momentum91", src: "momentum91.png",                    kind: "shot" },
-  { key: "work-allevents",  src: "AllEvents _ Browser_ centered.png", kind: "shot" },
+  // Homepage screenshots of the live sites (1600x1000 captures).
+  { key: "work-shree",      src: "sites/shree.png",      kind: "shot" },
+  { key: "work-downdating", src: "sites/downdating.png", kind: "shot" },
+  { key: "work-dhyanam",    src: "sites/dhyanam.png",    kind: "shot" },
+  { key: "work-bestbid",    src: "sites/bestbid.png",    kind: "shot" },
   { key: "portrait",        src: "portrait.png",                      kind: "shot", widths: [400, 800] },
 
   { key: "logo-webflow",    src: "webflow logo.svg",            kind: "svg" },

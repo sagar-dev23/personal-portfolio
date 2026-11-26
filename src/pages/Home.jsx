@@ -7,7 +7,7 @@ import { WEB_PROJECTS, AUTOMATION_PROJECTS } from "../content/projects.js";
 import { PROCESS, STACK, WEB_SERVICES_SHORT, AUTO_SERVICES_SHORT } from "../content/site.js";
 
 const bySlug = slug => [...WEB_PROJECTS, ...AUTOMATION_PROJECTS].find(p => p.slug === slug);
-const SELECTED = ["momentum91", "bi-directional-lead-sync", "phi-designs", "roi-calculator-report", "devx", "time-based-lead-routing"].map(bySlug);
+const SELECTED = ["shree-air-compressors", "bi-directional-lead-sync", "downdating", "roi-calculator-report", "bestbid", "time-based-lead-routing"].map(bySlug);
 
 // Old one-page anchors (/#about, /#contact) now live on their own pages.
 const MOVED = { "#about": "/about", "#contact": "/contact" };

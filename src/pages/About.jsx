@@ -13,7 +13,7 @@ export default function About() {
             <h1 id="about-title" className="h1 reveal in">Hi, I'm Sagar<span className="dot">.</span></h1>
             <div className="about-copy reveal in">
               <p className="hero-lede">I'm a website development and automation specialist. I like building things that are useful: websites people enjoy using, and systems that quietly do the boring work in the background.</p>
-              <p>I started with Webflow and have spent the last three years building marketing sites, landing pages and CMS builds in it, for SaaS and B2B companies, healthcare, and fashion and lifestyle brands. I've done that both freelance and in-house at <a href="/work/momentum91">Momentum91</a>, a digital product agency.</p>
+              <p>I started with Webflow and have spent the last three years building marketing sites, landing pages and CMS builds in it, for SaaS and B2B companies, healthcare, and fashion and lifestyle brands. I've done that both freelance and in-house at Momentum91, a digital product agency.</p>
               <p>The automation side grew out of the websites. A form is only the start: the lead has to reach a CRM, someone has to follow up, and a report has to get made. So I started building those workflows too, in n8n, Zapier and Make.com, connected to tools like HubSpot, Freshsales, GoHighLevel and Google Sheets. Lately I've been experimenting with AI steps using the OpenAI and Claude APIs.</p>
               <p>I'm open to freelance projects and to remote, full-time roles in website development or AI automation.</p>
             </div>
